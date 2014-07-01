@@ -1,0 +1,681 @@
+---
+layout: nil
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0">
+
+  <title>API Blueprint - API Documentation with powerful tooling</title>
+
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="apple-touch-icon-precomposed" href="/apple-touch-icon-precomposed.png">
+
+  <link rel="stylesheet" href="assets/normalize.min.css">
+  <link rel="stylesheet" href="assets/fonts.css">
+  <link rel="stylesheet" href="assets/apiblueprint.css">
+
+  <script>var ab_variant = 'default'; var time_of_creation = '{{ site.time | date: "%s" }}';</script>
+  <script src="assets/yepnope.min.js"></script>
+  <script src="assets/helpers.js"></script>
+  <script>
+    var ab_test_opts = ["ab_testing__v_logo", [["b", "API Documentation with powerful tooling"]], "default"];
+    abTest.apply(this, ab_test_opts);
+  </script>
+
+</head>
+<body>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-18252923-3', 'apiblueprint.org');
+  ga('send', 'pageview', {
+    'dimension5': window.ab_variant
+  });
+
+</script>
+
+<div class="page page--headlines">
+  <div class="page__inside">
+    <header class="logo">
+
+      <div class="logo__text">
+        <div class="logo__text__wrap">
+          <h1><span class="logo__bg"><span class="logo__text--highlight">api</span>blueprint</span></h1>
+        </div>
+      </div>
+
+      <div class="logo_animation">
+        <span data-dots="11" class="anim__item anim--md"><span class="anim--circle"></span></span>
+        <span data-dots="09" class="anim__item anim--human"><span class="anim--circle"></span></span>
+        <span data-dots="08" class="anim__item anim--comps"><span class="anim--circle"></span></span>
+        <span data-dots="28" class="anim__item anim--tools"><span class="anim--circle"></span></span>
+        <span data-dots="24" class="anim__item anim--life"><span class="anim--circle"></span></span>
+        <span data-dots="0"  class="anim__item anim--api"><span class="anim--circle">API</span></span>
+      </div>
+
+      <p class="logo__spot"><script>abTestWrite.apply(this, ab_test_opts)</script><span class="ab_testing__v_a">Connecting the dots in API development</span></p>
+
+      <ul class="logo__brandtext"><!--
+     --><li class="logo__brandtext__info brand--api"><span class="brandtext__in">Web API Language</span></li><!--
+     --><li class="logo__brandtext__info brand--md"><span class="brandtext__in">Pure Markdown</span></li><!--
+     --><li class="logo__brandtext__info brand--human"><span class="brandtext__in">Designed for Humans</span></li><!--
+     --><li class="logo__brandtext__info brand--comps"><span class="brandtext__in">Understandable by Machines</span></li><!--
+     --><li class="logo__brandtext__info brand--tools"><span class="brandtext__in">Powerful Tooling</span></li><!--
+     --><li class="logo__brandtext__info brand--life"><span class="brandtext__in">Easy Lifecycle</span></li>
+      </ul>
+
+    </header>
+
+    <section class="hello baseWrap">
+      <pre><code><span class="hello--linewrap"># <span class="hello--color--method">GET</span> <span class="hello--color--uri">/message</span></span>
+<span class="hello--linewrap">+ <span class="hello--color--keyword">Response 200 (text/plain)</span></span>
+<span class="hello--linewrap">      </span>
+<span class="hello--linewrap">      <span class="hello--color--preformatted">Hello World!</span></span></code></pre>
+
+      <section class="links">
+        <a class="link link--getStarted" href="#get-started">Get Started</a><!--
+       --><a class="link link--documentation" href="https://github.com/apiaryio/api-blueprint/blob/master/API%20Blueprint%20Specification.md">Documentation</a>
+      </section>
+
+    </section>
+  </div>
+</div><!-- /.page.headlines -->
+
+<div class="page page--controverse">
+  <div class="versus page__inside">
+    <!-- <h2 class="page__title">Features compared</h2> -->
+    <ul class="versus__block">
+      <li class="versus__item"><span class="versus__bg versus--diy"></span>
+        <h2 class="versus__title">API Blueprint vs. DIY</h2>
+        <p class="versus__about">Don't waste your time reinventing the wheel. Focus on your API.</p>
+        <p class="versus__about">Using API Blueprint gives you awesome tools for your whole API lifecycle. Use it to discuss your API with others. Generate documentation automatically. Or a test suite. Or even some Rails code.</p>
+      </li><!--
+     --><li class="versus__item"><span class="versus__bg versus--swagger"></span>
+        <h2 class="versus__title">API Blueprint vs. JSON</h2>
+        <p class="versus__about">JSON is a machine format. Leave it to machines.</p>
+        <p class="versus__about">Who will edit your documentation next year? Who will proofread it? With API Blueprint everybody can! Your designer and copywriter too.</p>
+      </li><!--
+     --><!--
+    --><li class="versus__item"><span class="versus__bg versus--google"></span>
+        <h2 class="versus__title">API Blueprint vs. Google Docs</h2>
+        <p class="versus__about">Your code is evolving, branching. It is versioned. It is tested. So should be your API documentation.</p>
+        <p class="versus__about">API Blueprint lives right there with your code, in your repository. It has the same lifecycle.  Your favorite CI/deployment workflow already works with it.</p>
+    </li>
+    </ul>
+  </div>
+</div><!-- /.page.controverse -->
+
+<div class="page page--examples">
+  <a name="examples"></a>
+  <div class="examples page__inside">
+    <h2 class="page__title">Examples</h2>
+    <div class="examples__tabs">
+      <ul class="examples__tabs--wrap"><!--
+     --><li class="examples__tab active"><a href="#hello_world" class="examples__switch">Hello World</a>
+          <pre><code class="markdown"># GET /message
++ Response 200 (text/plain)
+
+        Hello World!
+
+
+
+
+
+
+</code></pre>
+<pre><code class="ast">{
+    "_version": "2.0",
+    "metadata": [],
+    "name": "",
+    "description": "",
+    "resourceGroups": [
+        {
+            "name": "",
+            "description": "",
+            "resources": [
+                {
+                    "name": "",
+                    "description": "",
+                    "uriTemplate": "/message",
+                    "model": {},
+                    "parameters": [],
+                    "actions": [
+                        {
+                            "name": "",
+                            "description": "",
+                            "method": "GET",
+                            "parameters": [],
+                            "examples": [
+                                {
+                                    "name": "",
+                                    "description": "",
+                                    "requests": [],
+                                    "responses": [
+                                        {
+                                            "name": "200",
+                                            "description": "",
+                                            "headers": [
+                                                {
+                                                    "name": "Content-Type",
+                                                    "value": "text/plain"
+                                                }
+                                            ],
+                                            "body": "Hello World!\n",
+                                            "schema": ""
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}</code></pre>
+        </li><!--
+     --><li class="examples__tab"><a href="#into_action" class="examples__switch">Multiple Methods</a>
+          <pre><code class="markdown"># /messages/{id}
+
+## GET
++ Response 200 (text/plain)
+
+        Hello World!
+
+## DELETE
++ Response 204
+
+</code></pre>
+<pre><code class="ast">{
+    "_version": "2.0",
+    "metadata": [],
+    "name": "",
+    "description": "",
+    "resourceGroups": [
+        {
+            "name": "",
+            "description": "",
+            "resources": [
+                {
+                    "name": "",
+                    "description": "",
+                    "uriTemplate": "/messages/{id}",
+                    "model": {},
+                    "parameters": [],
+                    "actions": [
+                        {
+                            "name": "",
+                            "description": "",
+                            "method": "GET",
+                            "parameters": [],
+                            "examples": [
+                                {
+                                    "name": "",
+                                    "description": "",
+                                    "requests": [],
+                                    "responses": [
+                                        {
+                                            "name": "200",
+                                            "description": "",
+                                            "headers": [
+                                                {
+                                                    "name": "Content-Type",
+                                                    "value": "text/plain"
+                                                }
+                                            ],
+                                            "body": "Hello World!\n",
+                                            "schema": ""
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "",
+                            "description": "",
+                            "method": "DELETE",
+                            "parameters": [],
+                            "examples": [
+                                {
+                                    "name": "",
+                                    "description": "",
+                                    "requests": [],
+                                    "responses": [
+                                        {
+                                            "name": "204",
+                                            "description": "",
+                                            "headers": [],
+                                            "body": "",
+                                            "schema": ""
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}</code></pre>
+        </li><!--
+     --><li class="examples__tab"><a href="#you_name_it" class="examples__switch">Named Calls</a>
+          <pre><code class="markdown"># Message [/messages/{id}]
+
+## Retrieve Message [GET]
++ Response 200 (text/plain)
+
+        Hello World!
+
+## Delete Message [DELETE]
++ Response 204
+
+</code></pre>
+<pre><code class="ast">{
+    "_version": "2.0",
+    "metadata": [],
+    "name": "",
+    "description": "",
+    "resourceGroups": [
+        {
+            "name": "",
+            "description": "",
+            "resources": [
+                {
+                    "name": "Message",
+                    "description": "",
+                    "uriTemplate": "/messages/{id}",
+                    "model": {},
+                    "parameters": [],
+                    "actions": [
+                        {
+                            "name": "Retrieve Message",
+                            "description": "",
+                            "method": "GET",
+                            "parameters": [],
+                            "examples": [
+                                {
+                                    "name": "",
+                                    "description": "",
+                                    "requests": [],
+                                    "responses": [
+                                        {
+                                            "name": "200",
+                                            "description": "",
+                                            "headers": [
+                                                {
+                                                    "name": "Content-Type",
+                                                    "value": "text/plain"
+                                                }
+                                            ],
+                                            "body": "Hello World!\n",
+                                            "schema": ""
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Delete Message",
+                            "description": "",
+                            "method": "DELETE",
+                            "parameters": [],
+                            "examples": [
+                                {
+                                    "name": "",
+                                    "description": "",
+                                    "requests": [],
+                                    "responses": [
+                                        {
+                                            "name": "204",
+                                            "description": "",
+                                            "headers": [],
+                                            "body": "",
+                                            "schema": ""
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}</code></pre>
+        </li><!--
+     --><li class="examples__tab"><a href="#full_api" class="examples__switch">Larger Example</a>
+          <pre><code class="markdown"># Message of the Day API
+A simple [MOTD](http://en.wikipedia.org/wiki/Motd_(Unix)) API.
+
+# Message [/messages/{id}]
+This resource represents one particular message identified by its *id*.
+
+## Retrieve Message [GET]
+Retrieve a message by its *id*.
+
++ Response 200 (text/plain)
+
+        Hello World!
+
+## Delete Message [DELETE]
+Delete a message. **Warning:** This action **permanently** removes the message from the database.
+
++ Response 204
+
+</code></pre>
+<pre><code class="ast">{
+    "_version": "2.0",
+    "metadata": [],
+    "name": "Message of the Day API",
+    "description": "A simple [MOTD](http://en.wikipedia.org/wiki/Motd_(Unix)) API.\n\n",
+    "resourceGroups": [
+        {
+            "name": "",
+            "description": "",
+            "resources": [
+                {
+                    "name": "Message",
+                    "description": "This resource represents one particular message identified by its *id*.\n\n",
+                    "uriTemplate": "/messages/{id}",
+                    "model": {},
+                    "parameters": [],
+                    "actions": [
+                        {
+                            "name": "Retrieve Message",
+                            "description": "Retrieve a message by its *id*.\n\n",
+                            "method": "GET",
+                            "parameters": [],
+                            "examples": [
+                                {
+                                    "name": "",
+                                    "description": "",
+                                    "requests": [],
+                                    "responses": [
+                                        {
+                                            "name": "200",
+                                            "description": "",
+                                            "headers": [
+                                                {
+                                                    "name": "Content-Type",
+                                                    "value": "text/plain"
+                                                }
+                                            ],
+                                            "body": "Hello World!\n",
+                                            "schema": ""
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Delete Message",
+                            "description": "Delete a message. **Warning:** This action **permanently** removes the message from the database.\n\n",
+                            "method": "DELETE",
+                            "parameters": [],
+                            "examples": [
+                                {
+                                    "name": "",
+                                    "description": "",
+                                    "requests": [],
+                                    "responses": [
+                                        {
+                                            "name": "204",
+                                            "description": "",
+                                            "headers": [],
+                                            "body": "",
+                                            "schema": ""
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}</code></pre>
+        </li>
+      </ul>
+    </div>
+    <div class="examples__editor"><div id="editor_ace" data-overtitle="apiblueprint"></div></div>
+    <div class="examples__json"><div id="output_ast" class="ace_editor ace_folding-enabled" data-overtitle="json output"></div></div>
+    <p class="examples__links">
+      <a href="https://github.com/apiaryio/api-blueprint/tree/master/examples">
+        <span class="examples__ico--more"></span>
+        <span class="examples__link--text">More Examples</span>
+      </a>
+      <a href="https://github.com/apiaryio/api-blueprint/blob/master/API%20Blueprint%20Specification.md">
+        <span class="examples__ico--full"></span>
+        <span class="examples__link--text">Full Documentation</span>
+      </a>
+    </p>
+  </div>
+</div>
+
+<section class="page page--started">
+  <div class="started page__inside">
+    <article class="highlightedGreen"><span class="highlightedGreen__bg"></span>
+      <h2 class="started__question">Have a question?</h2>
+      <p class="started__stack"><a href="http://stackoverflow.com/questions/ask">Ask</a> at Stack Overflow, use the <a href="http://stackoverflow.com/tags/apiblueprint">apiblueprint</a> tag.</p>
+    </article>
+    <p class="subnotes subnotes--right">
+      For future plans &amp; tracked issues check out the <a href="https://github.com/apiaryio/api-blueprint/issues" class="started__alternatively__link">API Blueprint GitHub Issues</a>.
+    </p>
+    <article class="started__texts">
+      <a name="get-started" id="get-started"></a>
+      <h2 class="page__title">Get Started</h2>
+      <p class="started__texts--subheading">Use the reference API Blueprint parser – <a href="https://github.com/apiaryio/snowcrash">Snow Crash</a> or one of its <a href="#bindings">bindings</a>.</p>
+      <section>
+        <h3>Get Snow Crash</h3>
+        <pre><code class="pre">$ brew install --HEAD \
+  https://raw.github.com/apiaryio/snowcrash/master/tools/homebrew/snowcrash.rb</code></pre>
+        <p class="subnotes">
+          Build notes for platforms: <a href="https://github.com/apiaryio/snowcrash#snow-crash-command-line-tool">Linux</a>,
+          <a href="https://github.com/apiaryio/snowcrash/wiki/Building-on-Windows">Windows</a>
+        </p>
+      </section>
+      <section>
+        <h3>Create your first API</h3>
+        <pre><code><span class="pre">$ <strong>cat &lt;&lt; 'EOF' | snowcrash --format json</strong></span>
+<span class="pre"># My API</span>
+<span class="pre">## GET /message</span>
+<span class="pre">+ Response 200 (text/plain)</span>
+<span class="pre"></span>
+<span class="pre">        Hello World!</span>
+<span class="pre">EOF</span>
+<span class="pre">{</span>
+<span class="pre">  <span class="hello--color--key">"name"</span>: <span class="hello--color--value">"My API"</span>,</span>
+<span class="pre">  <span class="hello--color--key">"description"</span>: <span class="hello--color--value">""</span></span>
+<span class="pre">  ...</span></code></pre>
+      </section>
+    </article>
+  </div>
+</section>
+
+<section class="page page--bindings">
+  <div class="page__inside bindings">
+    <a name="bindings"></a><h2 class="page__title">Bindings</h2>
+    <ul class="binding__list">
+      <li class="binding__item">
+        <a class="binding__link" href="https://github.com/apiaryio/protagonist">
+          <span class="visuallyhidden">Protagonist (Node.JS package)</span>
+        <span class="binding__bg binding--nodejs"></span></a>
+      </li><!--
+   --><li class="binding__item">
+        <a class="binding__link" href="https://github.com/brutski/snowcrash-dot-net-wrapper">.NET</a>
+      </li><!--
+   --><li class="binding__item binding__item--making">
+        <span class="visuallyhidden">Ruby gem</span>
+        <span class="binding__bg binding--ruby"><span class="overlay--text">In the making</span></span>
+        <span class="binding__item--link--border"></span>
+      </li><!--
+   --><li class="binding__item binding__item--link"><span class="binding__item--link--border"></span>
+        Did not find yours?
+        <br>
+        <a href="https://github.com/apiaryio/snowcrash/wiki/Writing-a-binding" class="button__link button__link--green">Contribute</a>
+      </li>
+    </ul>
+    <h2 class="page__title">Tooling</h2>
+    <a name="tooling"></a>
+    <ul class="tooling__list">
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico__logo--apiary"></span></span><!--
+     --><h3 class="tooling__title"><a href="http://apiary.io" class="block larger">Apiary.io <span class="block">REST API Platform</span><span class="tooling__link"></span></a> <span class="block smaller">See, write and share APIs</span></h3><!--
+     --><p class="tooling__text">Apiary supercharges your Blueprints with interactive documentation, API mock, test suites, validations, traffic inspector and collaboration.</p>
+        </div></li>
+
+       <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__dredd"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/apiaryio/dredd" class="block larger"><span class="block">Dredd</span><span class="tooling__link"></span></a> <span class="block smaller">API Blueprint testing tool</span></h3><!--
+     --><p class="tooling__text">Plug your API Blueprint into the CI and get no more outdated API documentation.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/apiaryio/curl-trace-parser" class="block larger"><span class="block">cURL trace parser</span><span class="tooling__link"></span></a> <span class="block smaller">A HTTP introspection tool</span></h3><!--
+     --><p class="tooling__text">Record HTTP communication directly in the API Blueprint format.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/playround/rspec_api_blueprint" class="block larger"><span class="block">RSpec API Blueprint</span><span class="tooling__link"></span></a> <span class="block smaller">Autogeneration of API documentation</span></h3><!--
+     --><p class="tooling__text">Generate API Blueprint from request specs.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/subosito/iglo" class="block larger"><span class="block">Iglo</span><span class="tooling__link"></span></a> <span class="block smaller">Custom API blueprint formatter</span></h3><!--
+     --><p class="tooling__text">Generate static HTML documentation from API Blueprint.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__sublime-plugin"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/apiaryio/api-blueprint-sublime-plugin" class="block larger"><span class="block">Sublime Text plugin</span><span class="tooling__link"></span></a> <span class="block smaller">Parse API Blueprint with a hotkey</span></h3><!--
+     --><p class="tooling__text">API Blueprint syntax highlighting, live validation and parsing in your favorite text editor.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__atom"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://atom.io/packages/api-blueprint-preview" class="block larger"><span class="block">Atom editor plugin</span><span class="tooling__link"></span></a> <span class="block smaller">Plugin for API Blueprint Preview</span></h3><!--
+     --><p class="tooling__text">Preview HTML Blueprint in the editor.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__aglio"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/danielgtaylor/aglio" class="block larger"><span class="block">Aglio</span><span class="tooling__link"></span></a> <span class="block smaller">Custom API blueprint formatter</span></h3><!--
+     --><p class="tooling__text">Render HTML from API blueprint files, with support for custom themes. Executable and asynchronous Node.js library.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/apiaryio/matter_compiler" class="block larger"><span class="block">Matter Compiler</span><span class="tooling__link"></span></a> <span class="block smaller">API Blueprint from YAML or JSON</span></h3><!--
+     --><p class="tooling__text">Matter Compiler is an API Blueprint AST to API Blueprint conversion tool. It composes an API blueprint from its serialized AST media-type.</p>
+        </div></li>
+
+     <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/localmed/contractor" class="block larger"><span class="block">Contractor</span><span class="tooling__link"></span></a> <span class="block smaller">Mock server generator</span></h3><!--
+     --><p class="tooling__text">Generate a simple, fast mock server from an API Blueprint.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+            <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://bitbucket.org/outofcoffee/api-blueprint-mockserver" class="block larger"><span class="block">API Blueprint Mock Server</span><span class="tooling__link"></span></a> <span class="block smaller">API Blueprint Mock Server in Java</span></h3><!--
+     --><p class="tooling__text">Run a simple, fast mock server in Java from an API Blueprint. Plans for Android support in the future.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+            <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+     --><h3 class="tooling__title"><a href="http://git.io/blueman" class="block larger"><span class="block">Blueman</span><span class="tooling__link"></span></a> <span class="block smaller">Generate Postman collections</span></h3><!--
+     --><p class="tooling__text">Convert an API Blueprint into a Postman collection.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+            <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/thecopy/apiary2postman" class="block larger"><span class="block">apiary2postman</span><span class="tooling__link"></span></a> <span class="block smaller">Generate Postman collections</span></h3><!--
+     --><p class="tooling__text">Convert an API Blueprint into a Postman collection, supports fetching from Apiary API and reading from files or stdin.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__ico--question"><span class="tooling__icon--cube">?</span></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/apiaryio/api-blueprint/tree/gh-pages" class="larger">&lt; your tool here &gt;</a></h3><!--
+     --><p class="tooling__text">To share your API Blueprint tool <a href="https://github.com/apiaryio/api-blueprint/tree/gh-pages">fork this repository</a>, add the tool to this listing and create a pull-request.</p>
+        </div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="logo__buttons">
+  <div class="logo__buttons--in">
+    <p>
+      <iframe src="./github-btn.html?user=apiaryio&amp;repo=api-blueprint&amp;type=star&amp;count=true" allowtransparency="true" frameborder="0" scrolling="0" width="95" height="20"></iframe>
+      <a href="http://twitter.com/share" class="twitter-share-button" data-text="Simple &amp; lightweight humane markdown language for describing APIs as a prose – @apiblueprint" data-count="horizontal">Tweet</a>
+      <a href="https://twitter.com/apiblueprint" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @apiblueprint</a>
+    </p>
+  </div>
+</section>
+
+<section>
+  <a class="fork__link" href="https://github.com/apiaryio/api-blueprint">Fork
+    me on
+    GitHub</a>
+</section>
+
+<footer class="page page--footer">
+  <div class="page__inside footer">
+    <div class="clearfix">
+      <p class="footer--rightSide">
+        <a href="https://github.com/apiaryio/api-blueprint#readme">Documentation</a>
+        <a href="https://github.com/apiaryio/api-blueprint">Contribute</a>
+        <a href="http://apiary.io">Apiary</a>
+      </p>
+      <p class="footer--leftSide"> <span class="footer__licence"><span class="footer--spacer">-</span> API Blueprint is released under <a href="https://github.com/apiaryio/api-blueprint/blob/master/LICENSE">MIT License</a></span> <span class="footer__logo--float"><span class="colors--logo"><span class="colors--lighter">api</span>blueprint</span> &copy; 2013</span></p>
+    </div>
+  </div>
+</footer>
+
+  <script defer>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.async=true;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  <script>initDots();</script>
+  <script>
+    var astParserURI = 'http://api.apiblueprint.org/parser';
+    yepnope.paths = {
+      'acePath': '/assets/ace-noconflict-min'
+    };
+    var loadTheRest = function (testResults) {
+      var scriptSrcs = [];
+      yepnope({
+        test: testResults,
+        nope: ['acePath/ace.js', 'acePath/ext-searchbox.js', 'acePath/ext-static_highlight.js', 'acePath/mode-json.js', 'acePath/mode-markdown.js', 'acePath/theme-twilight.js'],
+        callback: function (path) {
+          scriptSrcs.push(path.replace(/^acePath/, yepnope.paths['acePath']));
+        },
+        complete: function () {
+          loadedAceAndThings();
+          if (store.enabled && !testResults) {
+            saveScriptsToStore(scriptSrcs);
+          }
+        }
+      });
+    };
+    yepnope.injectJs('/assets/safemap-store-promise.min.js', function () {
+      initLocalStore(loadTheRest);
+    });
+  </script>
+  <script>
+    document.body.parentNode.className += 'js';
+    if ('ontouchstart' in document.documentElement) {
+      window.scrollTo(0, 0);
+    }
+  </script>
+</body>
+</html>
