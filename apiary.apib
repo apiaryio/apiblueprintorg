@@ -99,7 +99,7 @@ Parse a blueprint (`vnd.apiblueprint+markdown`) into a serialized API Blueprint 
 
                     Hello World!
 
-+ Response 200 (vnd.apiblueprint.parseresult.raw+json; version=1.0)
++ Response 200 (vnd.apiblueprint.parseresult.raw+json; version=1.0; charset=utf-8)
 
         {
             "_version": "1.0",
@@ -170,7 +170,7 @@ Parse a blueprint (`vnd.apiblueprint+markdown`) into a serialized API Blueprint 
 
                     Hello World!
 
-+ Response 200 (vnd.apiblueprint.parseresult.raw+yaml; version=1.0)
++ Response 200 (vnd.apiblueprint.parseresult.raw+yaml; version=1.0; charset=utf-8)
 
         _version: 1.0
         ast: 
@@ -300,7 +300,7 @@ Convert a serialized API Blueprint AST (`vnd.apiblueprint.ast.raw+json` or `vnd.
             ]
         }
 
-+ Response 200 (vnd.apiblueprint+markdown; version=1A)
++ Response 200 (vnd.apiblueprint+markdown; version=1A; charset=utf-8)
 
         # /message
         ## GET
