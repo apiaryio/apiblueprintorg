@@ -31,7 +31,7 @@ apiServer.use logExpressError
 
 # catch EXCEPTIONS...
 process.on 'uncaughtException', (err) ->
-  console.trace 'EXCEPTION uncaught: ', err
+  console.trace 'APIBLUEPRINT_EXCEPTION_UNCAUGHT: ', err
   log.error 'Uncaught exception: ', err
 
 
