@@ -37,7 +37,9 @@ parseBlueprintCodeLocal = (blueprintCode, cb) ->
   blueprint.getLocalAst blueprintCode, (err, result) ->
     if err
       log.debug 'Cannot parse blueprint code', err
-      result.error = err
+      result =
+        error: err
+        warnings: []
     else
       log.debug 'Parsing code successful'
       result.error = null
