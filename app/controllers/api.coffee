@@ -6,7 +6,7 @@ express      = require 'express'
 compression  = require 'compression'
 errorHandler = require 'errorhandler'
 logger       = require 'morgan'
-YAML         = require 'json2yaml'
+yaml         = require 'js-yaml'
 qs           = require 'qs'
 
 # Modules
@@ -40,8 +40,7 @@ parseBlueprintCodeLocal = (blueprintCode, cb) ->
       result.error = err
     else
       log.debug 'Parsing code successful'
-      result.error = {code: 0}
-
+      result.error = null
     cb result
 
 
@@ -70,17 +69,6 @@ bodyParser = (req, res, next) ->
     next()
 
 
-sendParserResult = (reqHeaders, res, result) ->
-  formatName = 'json'
-  format = JSON
-  if reqHeaders.accept is 'vnd.apiblueprint.parseresult.raw+yaml'
-    formatName = 'yaml'
-    format = YAML
-
-  res.set 'Content-Type', "vnd.apiblueprint.parseresult.raw+#{formatName}; version=1.0"
-  res.send (if result.error.code is 0 then 200 else 400), format.stringify result
-
-
 # Setup
 exports.setup = (app) ->
   app.set 'trust proxy', true  # trust headers like X-Forwarded-* for setting req.proto et al
@@ -94,7 +82,7 @@ exports.setup = (app) ->
       showStack: true
       fileUrls: 'txmt'
   else
-    app.use logger('tiny')
+    app.use logger 'tiny'
 
 
   app.options '/parser', addCORS, (req, res) ->
@@ -114,16 +102,24 @@ exports.setup = (app) ->
       parseBlueprintCodeLocal blueprintCode, (result) ->
         result._version = '1.0'
         res.set 'X-Parser-Time', formatTime process.hrtime t
-        sendParserResult req.headers, res, result
+        res.statusCode = if result.error and result.error.code isnt 0 then 400 else 200
 
+        if req.accepts 'application/vnd.apiblueprint.parseresult.raw+yaml'
+          res.set 'Content-Type', 'application/vnd.apiblueprint.parseresult.raw+yaml; version=1.0'
+          body = yaml.safeDump JSON.parse JSON.stringify result  # https://github.com/nodeca/js-yaml/issues/132
+        else
+          res.set 'Content-Type', 'application/vnd.apiblueprint.parseresult.raw+json; version=1.0'
+          body = JSON.stringify result
+        res.send new Buffer body
 
   app.get '/', (req, res) ->
     res.set 'Content-Type', 'application/hal+json'
     res.set 'Link', '<http://docs.apiblueprintapi.apiary.io>; rel="profile"'
-    res.json 200,
+    res.send 200, new Buffer JSON.stringify
       _links:
         self: {href: '/'}
         parse: {href: '/parser'}
+
 
   # Setup production error handler returning JSON.
   # Modify `NODE_ENV` environment variable to force the right scope.
