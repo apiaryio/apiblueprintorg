@@ -12,7 +12,7 @@ The access to the service does not require authentication; however it is rate-li
 ### Blueprint
 
 ```
-vnd.apiblueprint+markdown
+text/vnd.apiblueprint+markdown
 ```
 
 API Blueprint as defined in its [specification](https://github.com/apiaryio/api-blueprint/blob/master/API%20Blueprint%20Specification.md).
@@ -20,17 +20,17 @@ API Blueprint as defined in its [specification](https://github.com/apiaryio/api-
 ### Blueprint AST
 
 ```
-vnd.apiblueprint.ast.raw+json
-vnd.apiblueprint.ast.raw+yaml
+application/vnd.apiblueprint.ast.raw+json
+application/vnd.apiblueprint.ast.raw+yaml
 ```
 
 Serialized API Blueprint AST is represented either in its JSON or YAML format as defined in [API Blueprint AST Serialization Media Types](https://github.com/apiaryio/api-blueprint-ast).
 
-### Parse Result 
+### Parse Result
 
 ```
-vnd.apiblueprint.parseresult.raw+json
-vnd.apiblueprint.parseresult.raw+yaml
+application/vnd.apiblueprint.parseresult.raw+json
+application/vnd.apiblueprint.parseresult.raw+yaml
 ```
 
 Result of API Blueprint parsing operation. This media types includes Blueprint AST media types and additional information – parser source code annotations (warnings and errors). Defined in [Parse Result Media Types](https://github.com/apiaryio/api-blueprint-ast/blob/master/Parse%20Result.md).
@@ -84,13 +84,13 @@ This resource does not have any attributes, instead it provides list of availabl
 API Blueprint parsing as provided by the [Snow Crash](https://github.com/apiaryio/snowcrash) reference parser.
 
 ### Parse [POST]
-Parse a blueprint (`vnd.apiblueprint+markdown`) into a serialized API Blueprint AST (`vnd.apiblueprint.ast.raw+json` or `vnd.apiblueprint.ast.raw+yaml`). The serialized Blueprint AST is returned alongside with any parser parser annotations in the form of a Parser Result (`vnd.apiblueprint.parseresult.raw+json` or `vnd.apiblueprint.parseresult.raw+yaml`).
+Parse a blueprint (`text/vnd.apiblueprint+markdown`) into a serialized API Blueprint AST (`application/vnd.apiblueprint.ast.raw+json` or `application/vnd.apiblueprint.ast.raw+yaml`). The serialized Blueprint AST is returned alongside with any parser parser annotations in the form of a Parser Result (`application/vnd.apiblueprint.parseresult.raw+json` or `application/vnd.apiblueprint.parseresult.raw+yaml`).
 
-+ Request JSON Parser Result (vnd.apiblueprint+markdown; version=1A)
++ Request JSON Parser Result (text/vnd.apiblueprint+markdown; version=1A)
 
     + Headers
 
-            Accept: vnd.apiblueprint.parseresult.raw+json
+            Accept: application/vnd.apiblueprint.parseresult.raw+json
 
     + Body
 
@@ -99,7 +99,7 @@ Parse a blueprint (`vnd.apiblueprint+markdown`) into a serialized API Blueprint 
 
                     Hello World!
 
-+ Response 200 (vnd.apiblueprint.parseresult.raw+json; version=1.0)
++ Response 200 (application/vnd.apiblueprint.parseresult.raw+json; version=1.0)
 
         {
             "_version": "1.0",
@@ -157,11 +157,11 @@ Parse a blueprint (`vnd.apiblueprint+markdown`) into a serialized API Blueprint 
             "warnings": []
         }
 
-+ Request YAML Parser Result (vnd.apiblueprint+markdown; version=1A)
++ Request YAML Parser Result (text/vnd.apiblueprint+markdown; version=1A)
 
     + Headers
 
-            Accept: vnd.apiblueprint.parseresult.raw+yaml
+            Accept: application/vnd.apiblueprint.parseresult.raw+yaml
 
     + Body
 
@@ -170,10 +170,10 @@ Parse a blueprint (`vnd.apiblueprint+markdown`) into a serialized API Blueprint 
 
                     Hello World!
 
-+ Response 200 (vnd.apiblueprint.parseresult.raw+yaml; version=1.0)
++ Response 200 (application/vnd.apiblueprint.parseresult.raw+yaml; version=1.0)
 
         _version: 1.0
-        ast: 
+        ast:
             _version: 2.0
             metadata:
             name:
@@ -206,15 +206,15 @@ Parse a blueprint (`vnd.apiblueprint+markdown`) into a serialized API Blueprint 
                                 schema:
         error: null
         warnings: []
-        
+
 
 ## Blueprint Composer [/composer]
 API Blueprint AST Media Types to API Blueprint conversions as provided by the [Matter Compiler](https://github.com/apiaryio/matter_compiler) tool.
 
 ### Compose [POST]
-Convert a serialized API Blueprint AST (`vnd.apiblueprint.ast.raw+json` or `vnd.apiblueprint.ast.raw+yaml`) into API Blueprint (`vnd.apiblueprint+markdown`).
+Convert a serialized API Blueprint AST (`application/vnd.apiblueprint.ast.raw+json` or `application/vnd.apiblueprint.ast.raw+yaml`) into API Blueprint (`text/vnd.apiblueprint+markdown`).
 
-+ Request (vnd.apiblueprint.ast.raw+yaml; version=2.0)
++ Request (application/vnd.apiblueprint.ast.raw+yaml; version=2.0)
 
         _version: 2.0
         metadata:
@@ -247,7 +247,7 @@ Convert a serialized API Blueprint AST (`vnd.apiblueprint.ast.raw+json` or `vnd.
                             body: "Hello World!\n"
                             schema:
 
-+ Request (vnd.apiblueprint.ast.raw+json; version=2.0)
++ Request (application/vnd.apiblueprint.ast.raw+json; version=2.0)
 
         {
             "_version": "2.0",
@@ -300,7 +300,7 @@ Convert a serialized API Blueprint AST (`vnd.apiblueprint.ast.raw+json` or `vnd.
             ]
         }
 
-+ Response 200 (vnd.apiblueprint+markdown; version=1A)
++ Response 200 (text/vnd.apiblueprint+markdown; version=1A)
 
         # /message
         ## GET
