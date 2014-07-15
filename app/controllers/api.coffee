@@ -29,8 +29,8 @@ normalizeNewlines = (s) ->
 
 
 formatTime = (hrtime) ->
-  # nano (1/1000) => mikro (1/1000000) => ms
-  hrtime[0] + ' s, ' + (hrtime[1] / 1000000).toFixed(3) + ' ms'
+  # nano (1/1000) => micro (1/1000000) => ms
+  hrtime[0] + ' s, ' + (hrtime[1] / 1000000).toFixed(0) + ' ms'
 
 
 parseBlueprintCodeLocal = (blueprintCode, cb) ->
