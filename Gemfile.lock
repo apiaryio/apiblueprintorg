@@ -1,0 +1,10 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    matter_compiler (0.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  matter_compiler
