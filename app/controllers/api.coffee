@@ -120,8 +120,12 @@ exports.setup = (app) ->
         res.set 'X-Composer-Time', formatTime process.hrtime t
 
         if err
-          res.json 400,
-            message: err.message
+          if err instanceof blueprint.MatterCompilerError
+            res.json 500,
+              message: 'Internal server error.'
+          else
+            res.json 400,
+              message: err.message
         else
           res.set 'Content-Type', 'text/vnd.apiblueprint+markdown; version=1A'
           res.send blueprintCode  # sending with charset=utf-8

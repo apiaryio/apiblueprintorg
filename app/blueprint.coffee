@@ -10,7 +10,7 @@ log = require('./logging').get 'app/blueprint'
 # Constants
 PARSE_OPTIONS =
   requireBlueprintName: false
-RUBY_TRACE_REGEXP = new RegExp /\/ruby*\.rb/
+RUBY_TRACE_REGEXP = new RegExp /\/ruby.*\.rb/
 
 
 # Parses AST from given blueprint. Calls given callback with error
@@ -25,6 +25,10 @@ parse = (blueprint, cb) ->
       log.debug 'Parsing code successful'
     cb err, result
 
+
+class MatterCompilerError extends Error
+  constructor: (@message) ->
+    @name = 'MatterCompilerError'
 
 # Composes blueprint from AST. Calls given callback with error
 # and a string representing the original blueprint code.
@@ -50,20 +54,20 @@ compose = (ast, format, cb) ->
   matterCompiler.stdout.on 'data', (buff) ->
     stdout += buff.toString()
   matterCompiler.stderr.on 'data', (buff) ->
-    data = buff.toString().trim()
-    if data
-      stderr += data
+    stderr += buff.toString()
 
   matterCompiler.on 'close', (code) ->
+    stderr = stderr.trim()
     if code isnt 0 and not stderr
       stderr = 'Unknown error.'
     if stderr
-      err = new Error stderr
       if RUBY_TRACE_REGEXP.test stderr
-        throw err  # Ruby error!? -> our problem -> it should fail
+        err = new MatterCompilerError stderr
+        log.error 'MATTER_COMPILER_FAILED: ', err
       else
+        err = new Error stderr
         log.debug 'Cannot compose blueprint from AST', err
-        cb err
+      cb err
     else
       cb null, stdout
 
@@ -75,4 +79,5 @@ compose = (ast, format, cb) ->
 module.exports = {
   parse
   compose
+  MatterCompilerError
 }
