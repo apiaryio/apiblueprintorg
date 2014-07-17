@@ -8,7 +8,7 @@
   "private": true,
   "homepage": "http://apiblueprint.org/",
   "scripts": {
-    "test": "scripts/dredd-test.sh"
+    "test": "./node_modules/gulp/bin/gulp.js test"
   },
   "description": "```markdown # GET /message + Response 200 (text/plain)",
   "directories": {
@@ -39,6 +39,14 @@
   "devDependencies": {
     "dredd": "",
     "nib": "",
-    "stylus": ""
+    "stylus": "",
+    "mocha": "~1.18.2",
+    "chai": "~1.9.0",
+    "gulp": "~3.8.6",
+    "gulp-mocha": "~0.5.1",
+    "gulp-coffeelint": "~0.3.2",
+    "gulp-watch": "~0.6.8",
+    "yargs": "~1.2.1",
+    "sinon": "~1.9.1"
   }
 }

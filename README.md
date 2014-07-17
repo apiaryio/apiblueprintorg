@@ -23,4 +23,6 @@ This repository contains an [apiblueprint.org](http://apiblueprint.org) site. Pl
 
 - install by `npm install`
 - run the app by `coffee api.coffee`
-- test by `npm test` (see also `.travis.yml` for [TravisCI](https://travis-ci.org/apiaryio/apiblueprintorg/))
+- install `gulp` globally `npm -g gulp`
+- develop with `gulp tdd`
+- verify with `gulp test`
