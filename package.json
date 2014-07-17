@@ -8,7 +8,7 @@
   "private": true,
   "homepage": "http://apiblueprint.org/",
   "scripts": {
-    "test": "scripts/dredd-test.sh"
+    "test": "./node_modules/gulp/bin/gulp.js test"
   },
   "description": "```markdown # GET /message + Response 200 (text/plain)",
   "directories": {
