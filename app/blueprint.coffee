@@ -6,7 +6,7 @@ log         = require('./logging').get 'app/blueprint'
 
 # Constants
 STRICT_OPTIONS =
-  requireBlueprintName: true
+  requireBlueprintName: false
 
 # Local functions
 getLocalAst = (code, cb) ->
