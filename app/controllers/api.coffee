@@ -15,12 +15,13 @@ blueprint = require '../blueprint'
 # Logging
 log       = require('../logging').get 'app/controllers/api'
 
+
 # Constants
-DEVELOPMENT_MODE = process.env.NODE_ENV is 'development'
-BUFFER_LIMIT     = parseInt(process.env.BUFFER_LIMIT, 10)
-ORIGIN_REGEXP    = new RegExp "#{process.env.DOMAIN}".replace(/[\-{}\[\]+?.,\\\^$|#\s]/g, '\\$&') + "$"
-APIARY_REGEXP    = new RegExp /apiary\.io$/
-DEVELOP_REGEXP   = new RegExp /apiblueprint\.dev:([\d]{1,})$/
+DEVELOPMENT_MODE  = process.env.NODE_ENV is 'development'
+BUFFER_LIMIT      = parseInt(process.env.BUFFER_LIMIT, 10)
+ORIGIN_REGEXP     = new RegExp "#{process.env.DOMAIN}".replace(/[\-{}\[\]+?.,\\\^$|#\s]/g, '\\$&') + "$"
+APIARY_REGEXP     = new RegExp /apiary\.io$/
+DEVELOP_REGEXP    = new RegExp /apiblueprint\.dev:([\d]{1,})$/
 
 
 # Local functions
@@ -31,19 +32,6 @@ normalizeNewlines = (s) ->
 formatTime = (hrtime) ->
   # nano (1/1000) => micro (1/1000000) => ms
   hrtime[0] + ' s, ' + (hrtime[1] / 1000000).toFixed(0) + ' ms'
-
-
-parseBlueprintCodeLocal = (blueprintCode, cb) ->
-  blueprint.getLocalAst blueprintCode, (err, result) ->
-    if err
-      log.debug 'Cannot parse blueprint code', err
-      result =
-        error: err
-        warnings: []
-    else
-      log.debug 'Parsing code successful'
-      result.error = null
-    cb result
 
 
 addCORS = (req, res, next) ->
@@ -90,18 +78,18 @@ exports.setup = (app) ->
   app.options '/parser', addCORS, (req, res) ->
     res.send ''
 
-
   app.post '/parser', addCORS, bodyParser, (req, res) ->
     if not req.body
-      res.send 400, format.stringify
-        error:
-          code: -1  # TODO consult this with proper snowcrash/protagonist error codes
-          message: 'No blueprint code, nothing to parse'
-        warnings: []
+      # FIXME snowcrash/parseresult has special code for this, so we should return
+      # proper result with a proper error code or let it to protagonist completely
+      res.json 400,
+        message: 'No blueprint code, nothing to parse.'
     else
       blueprintCode = normalizeNewlines req.body
+
       t = process.hrtime()
-      parseBlueprintCodeLocal blueprintCode, (result) ->
+      blueprint.parse blueprintCode, (err, result) ->
+        result.error ?= err or null
         result._version = '1.0'
         res.set 'X-Parser-Time', formatTime process.hrtime t
         res.statusCode = if result.error and result.error.code isnt 0 then 400 else 200
@@ -112,7 +100,36 @@ exports.setup = (app) ->
         else
           res.set 'Content-Type', 'application/vnd.apiblueprint.parseresult.raw+json; version=1.0'
           body = JSON.stringify result
-        res.send new Buffer body
+
+        res.send new Buffer body  # sending without charset parameter
+
+
+  app.options '/composer', addCORS, (req, res) ->
+    res.send ''
+
+  app.post '/composer', addCORS, bodyParser, (req, res) ->
+    if not req.body
+      res.json 400,
+        message: 'No AST, nothing to compose.'
+    else
+      format = if req.is 'application/vnd.apiblueprint.ast.raw+yaml' then 'yaml' else 'json'
+      ast = normalizeNewlines req.body
+
+      t = process.hrtime()
+      blueprint.compose ast, format, (err, blueprintCode) ->
+        res.set 'X-Composer-Time', formatTime process.hrtime t
+
+        if err
+          if err instanceof blueprint.MatterCompilerError
+            res.json 500,
+              message: 'Internal server error.'
+          else
+            res.json 400,
+              message: err.message
+        else
+          res.set 'Content-Type', 'text/vnd.apiblueprint+markdown; version=1A'
+          res.send blueprintCode  # sending with charset=utf-8
+
 
   app.get '/', (req, res) ->
     res.set 'Content-Type', 'application/hal+json'
@@ -121,15 +138,16 @@ exports.setup = (app) ->
       _links:
         self: {href: '/'}
         parse: {href: '/parser'}
+        compose: {href: '/composer'}
 
 
   # Setup production error handler returning JSON.
   # Modify `NODE_ENV` environment variable to force the right scope.
   if not DEVELOPMENT_MODE
-    app.use (error, req, res, next) ->
+    app.use (err, req, res, next) ->
       res.json 500,
         message: 'Internal server error.'
-        description: error.toString()
+        description: err.message
 
   # HTTP 404 error handler. We're not serving any static files,
   # so this is okay.
