@@ -24,7 +24,7 @@
     "url": "https://github.com/apiaryio/api-blueprint/issues"
   },
   "dependencies": {
-    "coffee-script": "~1.6.3",
+    "coffee-script": "~1.7.1",
     "compression": "",
     "connect": "",
     "errorhandler": "",
