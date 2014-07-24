@@ -47,6 +47,7 @@
     "gulp-coffeelint": "~0.3.2",
     "gulp-watch": "~0.6.8",
     "yargs": "~1.2.1",
-    "sinon": "~1.9.1"
+    "sinon": "~1.9.1",
+    "htmlparser2": ""
   }
 }
