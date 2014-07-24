@@ -1,18 +1,18 @@
 require 'mocha'
-{assert}     = require 'chai'
+{assert} = require 'chai'
+
+{parse} = require '../lib/blueprint'
 
 
-{getLocalAst} = require '../app/blueprint'
-
-describe "getLocalAst", ->
+describe "parse", ->
 
   describe "When I send in the blueprint without API name", ->
     error = undefined
 
     before (done) ->
-      getLocalAst 'xoxo', (err) ->
+      parse 'xoxo', (err) ->
         error = err
         done null
 
-    it 'I got an error', ->
-      assert.ok error
+    it 'I do not got an error', ->
+      assert.notOk error
