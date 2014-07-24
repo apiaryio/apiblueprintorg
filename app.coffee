@@ -1,5 +1,5 @@
 # Configuration
-config  = require './app/config'
+config  = require './lib/config'
 
 # System libraries
 express = require 'express'
@@ -7,7 +7,7 @@ http    = require 'http'
 logger  = require 'morgan'
 
 # Logging
-logging         = require('./app/logging')
+logging         = require('./lib/logging')
 log             = logging.get 'index'
 logExpressError = logging.get 'express/error'
 
@@ -23,7 +23,7 @@ if process.env.NODE_ENV is 'development'
   apiServer.use logger('dev')
 
 # api controller
-apiModule = require './app/controllers/api'
+apiModule = require './lib/controllers/api'
 apiModule.setup(apiServer)
 
 # Set up error handlers last; yeah, really, they need to be AFTER the controllers :(

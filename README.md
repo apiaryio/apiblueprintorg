@@ -23,7 +23,7 @@ This repository contains an [apiblueprint.org](http://apiblueprint.org) site. Pl
 ### Tips for development
 
 - install by `npm install`
-- run the app by `coffee api.coffee`
+- run the app by `coffee app.coffee`
 - install `gulp` globally `npm -g gulp`
 - develop with `gulp tdd`
 - verify with `gulp test`

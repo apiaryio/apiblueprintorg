@@ -3,7 +3,7 @@ if [ -z "$PORT" ]; then
   export PORT="8001"
 fi
 
-./node_modules/.bin/coffee api.coffee &
+./node_modules/.bin/coffee app.coffee &
 sleep 5
 PID=$!
 
