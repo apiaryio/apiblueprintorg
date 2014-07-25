@@ -86,7 +86,7 @@ API Blueprint parsing as provided by the [Snow Crash](https://github.com/apiaryi
 ### Parse [POST]
 Parse a blueprint (`text/vnd.apiblueprint+markdown`) into a serialized API Blueprint AST (`application/vnd.apiblueprint.ast.raw+json` or `application/vnd.apiblueprint.ast.raw+yaml`). The serialized Blueprint AST is returned alongside with any parser parser annotations in the form of a Parser Result (`application/vnd.apiblueprint.parseresult.raw+json` or `application/vnd.apiblueprint.parseresult.raw+yaml`).
 
-+ Request JSON Parser Result (text/vnd.apiblueprint+markdown; version=1A)
++ Request JSON Parser Result (text/vnd.apiblueprint+markdown; version=1A; charset=utf-8)
 
     + Headers
 
@@ -157,7 +157,7 @@ Parse a blueprint (`text/vnd.apiblueprint+markdown`) into a serialized API Bluep
             "warnings": []
         }
 
-+ Request YAML Parser Result (text/vnd.apiblueprint+markdown; version=1A)
++ Request YAML Parser Result (text/vnd.apiblueprint+markdown; version=1A; charset=utf-8)
 
     + Headers
 

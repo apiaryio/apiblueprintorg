@@ -30,6 +30,7 @@
     "errorhandler": "",
     "express": "~4.x",
     "js-yaml": "",
+    "media-typer": "",
     "morgan": "",
     "node-hipchat": "",
     "protagonist": "0.11.0",
