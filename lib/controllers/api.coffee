@@ -61,7 +61,7 @@ parseBody = (req, res, next) ->
   # Check Content-Type of the incoming data - in case it declares other
   # encoding than utf-8, we reject it with 415 Unsupported Media Type
   # (consulted the HTTP code with http://stackoverflow.com/a/11478530/325365).
-  type = req.headers['content-type']
+  type = req.get 'content-type'
   if type
     charset = typer.parse(type).parameters.charset
     if charset and charset isnt 'utf-8'
