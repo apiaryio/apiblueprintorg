@@ -3,3 +3,12 @@ node_js:
   - 0.10
 env:
   - PORT=4000
+notifications:
+  email:
+    recipients:
+      - honza@apiary.io
+    on_success: change
+    on_failure: always
+  hipchat:
+    rooms:
+      secure: "LujVeC64Kuz+idZJCtXdZvs1R48RIsoBdkruN8Vd4VTMlh3iOoqAy3NzTcFlQDUQK9mDLgc8/C6NN4lNPdaa00rHAxZIdCTC3enKbMs5UygGKhVvpQRDVCCTSfHhwmsTj3anH0ONg3XBwKwwnUH2T5ClLPXFjHJr/9XYHaUHFu4="
