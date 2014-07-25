@@ -10,13 +10,13 @@ handleError = (err) ->
   process.exit 1
 
 
-gulp.task 'test', ->
+gulp.task 'unit-test', ->
   gulp.src('tests/*-test.*', read: false)
     .pipe(mocha(reporter: 'spec', grep: yargs.argv.grep))
     .on 'error', handleError
 
 
-gulp.task 'forgiving-test', ->
+gulp.task 'forgiving-unit-test', ->
   gulp.src('tests/*-test.*')
     .pipe(mocha(reporter: 'dot', compilers: 'coffee:coffee-script'))
     .on 'error', (err) ->
@@ -25,10 +25,10 @@ gulp.task 'forgiving-test', ->
       @emit 'end'
 
 
-# gulp.task 'integration-test', ->
-#   gulp.src('tests/run-integration-tests.coffee')
-#   .pipe(mocha(reporter: 'spec', grep: yargs.argv.grep))
-#   .on 'error', handleError
+gulp.task 'integration-test', ->
+  gulp.src('tests/integration/*-test.*')
+    .pipe(mocha(reporter: 'spec', grep: yargs.argv.grep))
+    .on 'error', handleError
 
 
 gulp.task 'lint', ->
@@ -48,12 +48,12 @@ gulp.task 'forgiving-lint', ->
       @emit 'end'
 
 
-gulp.task 'citest', ['test'] #, 'integration-test']
+gulp.task 'test', ['unit-test', 'integration-test']
 
 
 gulp.task 'tdd', ->
-  gulp.watch 'lib/*',  ['forgiving-lint', 'forgiving-test']
-  gulp.watch 'tests/*-test.*', ['forgiving-lint', 'forgiving-test']
+  gulp.watch 'lib/*',  ['forgiving-lint', 'forgiving-unit-test']
+  gulp.watch 'tests/*-test.*', ['forgiving-lint', 'forgiving-unit-test']
 
 
 gulp.task 'default', ['test']

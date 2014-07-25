@@ -4,7 +4,7 @@ require 'mocha'
 {parse} = require '../lib/blueprint'
 
 
-describe "parse", ->
+describe "Parsing", ->
 
   describe "When I send in the blueprint without API name", ->
     error = undefined
@@ -14,5 +14,5 @@ describe "parse", ->
         error = err
         done null
 
-    it 'I do not got an error', ->
+    it 'I do not get an error', ->
       assert.notOk error
