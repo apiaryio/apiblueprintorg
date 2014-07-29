@@ -26,9 +26,11 @@ gulp.task 'forgiving-unit-test', ->
 
 
 gulp.task 'integration-test', ->
+  process.env.PORT = 8001
   gulp.src('tests/integration/*-test.*')
-  .pipe(mocha(reporter: 'spec', grep: yargs.argv.grep))
-  .on 'error', handleError
+    .pipe(mocha(reporter: 'spec', grep: yargs.argv.grep))
+    .on('error', -> handleError)
+    .once 'end', -> process.exit 0
 
 
 gulp.task 'lint', ->
@@ -36,8 +38,7 @@ gulp.task 'lint', ->
     .pipe(coffeelint(opt: {max_line_length: {value: 1024, level: 'ignore'}}))
     .pipe(coffeelint.reporter())
     .pipe(coffeelint.reporter('fail'))
-    .on 'error', ->
-      process.exit 1
+    .on 'error', -> process.exit 1
 
 
 gulp.task 'forgiving-lint', ->

@@ -1,6 +1,6 @@
 process.env.DOMAIN           ?= 'api.apiblueprint.dev'
-process.env.PORT             ?= 8000
-process.env.BUFFER_LIMIT     ?= 200000 # bytes for buffering sent body
+process.env.PORT             ?= 8000  # 8001 reserved for tests
+process.env.BUFFER_LIMIT     ?= 200000  # bytes for buffering sent body
 process.env.VERBOSE          ?= ''
 
 process.env.NODE_ENV         ?= 'development'

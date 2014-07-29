@@ -35,9 +35,8 @@ describe "Parsing", ->
         error = err
         done null
 
-    it "I get no error", (done) ->
+    it "I get no error", ->
       assert.notOk error
-      done()
 
 
 describe "Composing", ->
