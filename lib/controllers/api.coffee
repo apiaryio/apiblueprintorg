@@ -33,9 +33,9 @@ formatTime = (hrtime) ->
   # nano (1/1000) => micro (1/1000000) => ms
   hrtime[0] + ' s, ' + (hrtime[1] / 1000000).toFixed(0) + ' ms'
 
-addCORS = (req, res, next) ->
+addCORS = (req, res, methods) ->
   res.set 'Access-Control-Allow-Credentials', 'true'
-  res.set 'Access-Control-Allow-Methods', 'POST, GET'
+  res.set 'Access-Control-Allow-Methods', methods.join(', ') + ', OPTIONS'
   res.set 'Access-Control-Allow-Headers', 'Content-Type, Accept'
   res.set 'Access-Control-Expose-Headers', 'Content-Type, Accept'
   res.set 'Access-Control-Max-Age', 60 * 60 * 24
@@ -46,7 +46,17 @@ addCORS = (req, res, next) ->
   else
     res.set 'Access-Control-Allow-Origin', process.env.DOMAIN
 
-  next()
+optionsHandler = () ->
+  methods = (method.toUpperCase() for method in arguments)
+  if 'OPTIONS' in methods
+    methods.pop 'OPTIONS'
+
+  (req, res, next) ->
+    addCORS req, res, methods
+    if req.method not in methods
+      res.set 'Allow', methods.join(', ') + ', OPTIONS'
+      return res.send (if req.method is 'OPTIONS' then 200 else 405), new Buffer ''
+    next()
 
 # In case clients use Accept-Charset and the request doesn't expect
 # our response to be in utf-8, we strictly reject it with 406 Not Acceptable.
@@ -93,13 +103,7 @@ exports.setup = (app) ->
     app.use logger 'tiny'
 
 
-  app.all '*', addCORS, checkCharset
-
-
-  app.options '/parser', (req, res) ->
-    res.send ''
-
-  app.post '/parser', parseBody, (req, res) ->
+  app.all '/parser', optionsHandler('POST'), checkCharset, parseBody, (req, res) ->
     if not req.body
       # FIXME snowcrash/parseresult has special code for this, so we should return
       # proper result with a proper error code or let it to protagonist completely
@@ -125,10 +129,7 @@ exports.setup = (app) ->
         res.send new Buffer body  # sending without charset parameter
 
 
-  app.options '/composer', (req, res) ->
-    res.send ''
-
-  app.post '/composer', parseBody, (req, res) ->
+  app.all '/composer', optionsHandler('POST'), checkCharset, parseBody, (req, res) ->
     if not req.body
       res.json 400,
         message: 'No AST, nothing to compose.'
@@ -152,14 +153,19 @@ exports.setup = (app) ->
           res.send blueprintCode  # sending with charset=utf-8
 
 
-  app.get '/', (req, res) ->
+  app.all '/', optionsHandler('GET', 'HEAD'), checkCharset, (req, res) ->
     res.set 'Content-Type', 'application/hal+json'
     res.set 'Link', '<http://docs.apiblueprintapi.apiary.io>; rel="profile"'
-    res.send 200, new Buffer JSON.stringify
-      _links:
-        self: {href: '/'}
-        parse: {href: '/parser'}
-        compose: {href: '/composer'}
+
+    if req.method is 'GET'
+      body = JSON.stringify
+        _links:
+          self: {href: '/'}
+          parse: {href: '/parser'}
+          compose: {href: '/composer'}
+    else
+      body = ''
+    res.send 200, new Buffer body
 
 
   # Setup production error handler returning JSON.
