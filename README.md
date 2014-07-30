@@ -19,6 +19,7 @@ This repository contains an [apiblueprint.org](http://apiblueprint.org) site. Pl
 - `master` branch
 - [Express.js](http://expressjs.com/) app written in CoffeeScript
 - Heroku config: `BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git` (see [multi buildpack](https://github.com/ddollar/heroku-buildpack-multi/))
+- Documentation of the API: [docs.apiblueprintapi.apiary.io](http://docs.apiblueprintapi.apiary.io/)
 
 ### Tips for development
 
