@@ -68,7 +68,7 @@ parseBody = (req, res, next) ->
   if type
     charset = typer.parse(type).parameters.charset
     if charset and charset.replace('-', '').toLowerCase() isnt 'utf8'
-      return error res,
+      return sendError res,
         code: 415
         message: "Request body sent as #{charset}, but only utf-8 is supported."
 
@@ -80,12 +80,16 @@ parseBody = (req, res, next) ->
   req.on 'end', ->
     next()
 
-error = (res, {code, message, description}) ->
+sendJSON = (res, code, obj) ->
+  if not res.get 'Content-Type'
+    res.set 'Content-Type', 'application/json'
+  res.send code or 200, new Buffer(if obj then JSON.stringify obj else '')
+
+sendError = (res, {code, message, description}) ->
   err = {message}
   if description
     err.description = description
-  res.set 'Content-Type', 'application/json'
-  res.send code or 400, new Buffer JSON.stringify err
+  sendJSON res, code or 400, err
 
 
 # Setup
@@ -108,7 +112,7 @@ exports.setup = (app) ->
     if not req.body
       # FIXME snowcrash/parseresult has special code for this, so we should return
       # proper result with a proper error code or let it to protagonist completely
-      error res,
+      sendError res,
         message: 'No blueprint code, nothing to parse.'
     else
       blueprintCode = normalizeNewlines req.body
@@ -132,7 +136,7 @@ exports.setup = (app) ->
 
   app.all '/composer', optionsHandler('POST'), parseBody, (req, res) ->
     if not req.body
-      error res,
+      sendError res,
         message: 'No AST, nothing to compose.'
     else
       format = if req.is 'application/vnd.apiblueprint.ast.raw+yaml' then 'yaml' else 'json'
@@ -144,11 +148,11 @@ exports.setup = (app) ->
 
         if err
           if err instanceof blueprint.MatterCompilerError
-            error res,
+            sendError res,
               code: 500
               message: 'Internal server error.'
           else
-            error res,
+            sendError res,
               message: err.message
         else
           res.set 'Content-Type', 'text/vnd.apiblueprint+markdown; version=1A'
@@ -159,15 +163,14 @@ exports.setup = (app) ->
     res.set 'Content-Type', 'application/hal+json'
     res.set 'Link', '<http://docs.apiblueprintapi.apiary.io>; rel="profile"'
 
+    body = undefined
     if req.method is 'GET'
-      body = JSON.stringify
+      body =
         _links:
           self: {href: '/'}
           parse: {href: '/parser'}
           compose: {href: '/composer'}
-    else
-      body = ''
-    res.send 200, new Buffer body
+    sendJSON res, 200, body
 
 
   # Setup production error handler returning JSON.
@@ -176,7 +179,7 @@ exports.setup = (app) ->
     if isDevelopmentMode()
       next()
     else
-      error res,
+      sendError res,
         code: 500
         message: 'Internal server error.'
         description: err.message
@@ -185,6 +188,6 @@ exports.setup = (app) ->
   # HTTP 404 error handler. We're not serving any static files,
   # so this is okay.
   app.all '*', (req, res) ->
-    error res,
+    sendError res,
       code: 404
       message: 'Specified resource was not found.'
