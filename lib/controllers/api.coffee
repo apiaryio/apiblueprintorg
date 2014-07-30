@@ -58,15 +58,6 @@ optionsHandler = () ->
       return res.send (if req.method is 'OPTIONS' then 200 else 405), new Buffer ''
     next()
 
-# In case clients use Accept-Charset and the request doesn't expect
-# our response to be in utf-8, we strictly reject it with 406 Not Acceptable.
-checkCharset = (req, res, next) ->
-  if not req.acceptsCharset 'utf-8'
-    res.set 'Content-Type', 'application/json'
-    return res.send 406, if req.method is 'HEAD' then (new Buffer '') else
-      message: 'The only supported encoding of response is utf-8.'
-  next()
-
 parseBody = (req, res, next) ->
   # Check Content-Type of the incoming data - in case it declares other
   # encoding than utf-8, we reject it with 415 Unsupported Media Type
@@ -74,7 +65,7 @@ parseBody = (req, res, next) ->
   type = req.get 'content-type'
   if type
     charset = typer.parse(type).parameters.charset
-    if charset and charset isnt 'utf-8'
+    if charset and charset.replace('-', '').toLowerCase() isnt 'utf8'
       return res.json 415,
         message: "Request body sent as #{charset}, but only utf-8 is supported."
 
@@ -103,7 +94,7 @@ exports.setup = (app) ->
     app.use logger 'tiny'
 
 
-  app.all '/parser', optionsHandler('POST'), checkCharset, parseBody, (req, res) ->
+  app.all '/parser', optionsHandler('POST'), parseBody, (req, res) ->
     if not req.body
       # FIXME snowcrash/parseresult has special code for this, so we should return
       # proper result with a proper error code or let it to protagonist completely
@@ -129,7 +120,7 @@ exports.setup = (app) ->
         res.send new Buffer body  # sending without charset parameter
 
 
-  app.all '/composer', optionsHandler('POST'), checkCharset, parseBody, (req, res) ->
+  app.all '/composer', optionsHandler('POST'), parseBody, (req, res) ->
     if not req.body
       res.json 400,
         message: 'No AST, nothing to compose.'
@@ -153,7 +144,7 @@ exports.setup = (app) ->
           res.send blueprintCode  # sending with charset=utf-8
 
 
-  app.all '/', optionsHandler('GET', 'HEAD'), checkCharset, (req, res) ->
+  app.all '/', optionsHandler('GET', 'HEAD'), (req, res) ->
     res.set 'Content-Type', 'application/hal+json'
     res.set 'Link', '<http://docs.apiblueprintapi.apiary.io>; rel="profile"'
 
