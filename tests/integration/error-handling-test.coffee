@@ -4,7 +4,7 @@ request = require 'request'
 sinon = require 'sinon'
 express = require 'express'
 
-api = require '../../lib/controllers/api.coffee'
+require '../../app.coffee'
 blueprint = require '../../lib/blueprint.coffee'
 
 
