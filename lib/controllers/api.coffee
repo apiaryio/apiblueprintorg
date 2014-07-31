@@ -18,7 +18,6 @@ log       = require('../logging').get 'app/controllers/api'
 
 
 # Constants
-DEVELOPMENT_MODE  = process.env.NODE_ENV is 'development'
 BUFFER_LIMIT      = parseInt(process.env.BUFFER_LIMIT, 10)
 ORIGIN_REGEXP     = new RegExp "#{process.env.DOMAIN}".replace(/[\-{}\[\]+?.,\\\^$|#\s]/g, '\\$&') + "$"
 APIARY_REGEXP     = new RegExp /apiary\.io$/
@@ -26,6 +25,9 @@ DEVELOP_REGEXP    = new RegExp /apiblueprint\.dev:([\d]{1,})$/
 
 
 # Local functions
+isDevelopmentMode = ->
+  process.env.NODE_ENV is 'development'
+
 normalizeNewlines = (s) ->
   s.replace(/\r\n/g, "\n").replace(/\r/g, "\n")
 
@@ -66,7 +68,8 @@ parseBody = (req, res, next) ->
   if type
     charset = typer.parse(type).parameters.charset
     if charset and charset.replace('-', '').toLowerCase() isnt 'utf8'
-      return res.json 415,
+      return error res,
+        code: 415
         message: "Request body sent as #{charset}, but only utf-8 is supported."
 
   # ...otherwise (type or charset are missing) we just assume it's utf-8.
@@ -77,6 +80,13 @@ parseBody = (req, res, next) ->
   req.on 'end', ->
     next()
 
+error = (res, {code, message, description}) ->
+  err = {message}
+  if description
+    err.description = description
+  res.set 'Content-Type', 'application/json'
+  res.send code or 400, new Buffer JSON.stringify err
+
 
 # Setup
 exports.setup = (app) ->
@@ -85,7 +95,7 @@ exports.setup = (app) ->
 
   # Setup development error handler.
   # Modify `NODE_ENV` environment variable to force the right scope.
-  if DEVELOPMENT_MODE
+  if isDevelopmentMode()
     app.use errorHandler
       dumpExceptions: true
       showStack: true
@@ -98,7 +108,7 @@ exports.setup = (app) ->
     if not req.body
       # FIXME snowcrash/parseresult has special code for this, so we should return
       # proper result with a proper error code or let it to protagonist completely
-      res.json 400,
+      error res,
         message: 'No blueprint code, nothing to parse.'
     else
       blueprintCode = normalizeNewlines req.body
@@ -122,7 +132,7 @@ exports.setup = (app) ->
 
   app.all '/composer', optionsHandler('POST'), parseBody, (req, res) ->
     if not req.body
-      res.json 400,
+      error res,
         message: 'No AST, nothing to compose.'
     else
       format = if req.is 'application/vnd.apiblueprint.ast.raw+yaml' then 'yaml' else 'json'
@@ -134,10 +144,11 @@ exports.setup = (app) ->
 
         if err
           if err instanceof blueprint.MatterCompilerError
-            res.json 500,
+            error res,
+              code: 500
               message: 'Internal server error.'
           else
-            res.json 400,
+            error res,
               message: err.message
         else
           res.set 'Content-Type', 'text/vnd.apiblueprint+markdown; version=1A'
@@ -161,14 +172,19 @@ exports.setup = (app) ->
 
   # Setup production error handler returning JSON.
   # Modify `NODE_ENV` environment variable to force the right scope.
-  if not DEVELOPMENT_MODE
-    app.use (err, req, res, next) ->
-      res.json 500,
+  app.use (err, req, res, next) ->
+    if isDevelopmentMode()
+      next()
+    else
+      error res,
+        code: 500
         message: 'Internal server error.'
         description: err.message
 
+
   # HTTP 404 error handler. We're not serving any static files,
   # so this is okay.
-  app.get '*', (req, res) ->
-    res.json 404,
+  app.all '*', (req, res) ->
+    error res,
+      code: 404
       message: 'Specified resource was not found.'
