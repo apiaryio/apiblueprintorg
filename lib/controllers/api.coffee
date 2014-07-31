@@ -109,29 +109,23 @@ exports.setup = (app) ->
 
 
   app.all '/parser', optionsHandler('POST'), parseBody, (req, res) ->
-    if not req.body
-      # FIXME snowcrash/parseresult has special code for this, so we should return
-      # proper result with a proper error code or let it to protagonist completely
-      sendError res,
-        message: 'No blueprint code, nothing to parse.'
-    else
-      blueprintCode = normalizeNewlines req.body
+    blueprintCode = normalizeNewlines req.body
 
-      t = process.hrtime()
-      blueprint.parse blueprintCode, (err, result) ->
-        result.error ?= err or null
-        result._version = '1.0'
-        res.set 'X-Parser-Time', formatTime process.hrtime t
-        res.statusCode = if result.error and result.error.code isnt 0 then 400 else 200
+    t = process.hrtime()
+    blueprint.parse blueprintCode, (err, result) ->
+      result.error ?= err or null
+      result._version = '1.0'
+      res.set 'X-Parser-Time', formatTime process.hrtime t
+      res.statusCode = if result.error and result.error.code isnt 0 then 400 else 200
 
-        if req.accepts 'application/vnd.apiblueprint.parseresult.raw+yaml'
-          res.set 'Content-Type', 'application/vnd.apiblueprint.parseresult.raw+yaml; version=1.0'
-          body = yaml.safeDump JSON.parse JSON.stringify result  # https://github.com/nodeca/js-yaml/issues/132
-        else
-          res.set 'Content-Type', 'application/vnd.apiblueprint.parseresult.raw+json; version=1.0'
-          body = JSON.stringify result
+      if req.accepts 'application/vnd.apiblueprint.parseresult.raw+yaml'
+        res.set 'Content-Type', 'application/vnd.apiblueprint.parseresult.raw+yaml; version=1.0'
+        body = yaml.safeDump JSON.parse JSON.stringify result  # https://github.com/nodeca/js-yaml/issues/132
+      else
+        res.set 'Content-Type', 'application/vnd.apiblueprint.parseresult.raw+json; version=1.0'
+        body = JSON.stringify result
 
-        res.send new Buffer body  # sending without charset parameter
+      res.send new Buffer body  # sending without charset parameter
 
 
   app.all '/composer', optionsHandler('POST'), parseBody, (req, res) ->
