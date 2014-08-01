@@ -33,7 +33,7 @@
     "media-typer": "",
     "morgan": "",
     "node-hipchat": "",
-    "protagonist": "0.11.0",
+    "protagonist": "0.12.1",
     "qs": "",
     "winston": "git://github.com/apiaryio/winston.git#production"
   },
