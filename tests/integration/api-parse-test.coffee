@@ -4,6 +4,7 @@ request = require 'request'
 yaml = require 'js-yaml'
 
 require '../../app.coffee'
+{assertHeaderExists, assertHeaderEquals} = require './testutils.coffee'
 
 
 PORT = process.env.PORT
@@ -68,11 +69,11 @@ describe "Parsing", ->
         it "I get no error", ->
           assert.notOk format.toParseResult(res.body).error
         it "I get X-Parser-Time header", ->
-          assert.ok res.headers['x-parser-time']
+          assertHeaderExists res, 'x-parser-time'
         it "I get _version in response", ->
           assert.ok format.toParseResult(res.body)._version
         it "I get the right #{name} parseresult Content-Type, without charset", ->
-          assert.equal res.headers['content-type'], "#{format.contentType}; version=1.0"
+          assertHeaderEquals res, 'content-type', "#{format.contentType}; version=1.0"
 
   describe "When I POST no blueprint", ->
     res = undefined

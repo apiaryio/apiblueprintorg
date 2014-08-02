@@ -5,6 +5,7 @@ sinon = require 'sinon'
 yaml = require 'js-yaml'
 
 require '../../app.coffee'
+{assertHeaderExists, assertHeaderEquals} = require './testutils.coffee'
 blueprint = require '../../lib/blueprint.coffee'
 
 
@@ -60,9 +61,9 @@ describe "Composing", ->
         it "I get the right blueprint", ->
           assert.equal bp.trim(), res.body.trim()
         it "I get X-Composer-Time header", ->
-          assert.ok res.headers['x-composer-time']
+          assertHeaderExists res, 'x-composer-time'
         it "I get the right Markdown Content-Type, with charset", ->
-          assert.equal res.headers['content-type'], "text/vnd.apiblueprint+markdown; version=1A; charset=utf-8"
+          assertHeaderEquals res, 'content-type', "text/vnd.apiblueprint+markdown; version=1A; charset=utf-8"
 
   describe "When I POST no AST", ->
     res = undefined
@@ -75,7 +76,7 @@ describe "Composing", ->
     it "I get HTTP 400", ->
       assert.equal 400, res.statusCode
     it "I get plain JSON Content-Type", ->
-      assert.equal 'application/json', res.headers['content-type']
+      assertHeaderEquals res, 'content-type', 'application/json'
     it "I get the error message", ->
       assert.ok JSON.parse(res.body).message
 
@@ -96,7 +97,7 @@ describe "Composing", ->
     it "I get HTTP 400", ->
       assert.equal 400, res.statusCode
     it "I get plain JSON Content-Type", ->
-      assert.equal 'application/json', res.headers['content-type']
+      assertHeaderEquals res, 'content-type', 'application/json'
     it "I get the error message", ->
       assert.ok JSON.parse(res.body).message
 
@@ -115,4 +116,4 @@ describe "Composing", ->
     it "I get HTTP 500", ->
       assert.equal 500, res.statusCode
     it "I get plain JSON Content-Type", ->
-      assert.equal 'application/json', res.headers['content-type']
+      assertHeaderEquals res, 'application/json'
