@@ -3,6 +3,7 @@ node_js:
   - "0.10"
 env:
   - PORT=4000
+before_install: bundle install
 notifications:
   email:
     recipients:
