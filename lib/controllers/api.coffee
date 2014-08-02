@@ -57,7 +57,8 @@ optionsHandler = () ->
     addCORS req, res, methods
     if req.method not in methods
       res.set 'Allow', methods.join(', ') + ', OPTIONS'
-      return res.send (if req.method is 'OPTIONS' then 200 else 405), new Buffer ''
+      res.status (if req.method is 'OPTIONS' then 200 else 405)
+      return res.send new Buffer ''
     next()
 
 parseBody = (req, res, next) ->
@@ -83,7 +84,8 @@ parseBody = (req, res, next) ->
 sendJSON = (res, code, obj) ->
   if not res.get 'Content-Type'
     res.set 'Content-Type', 'application/json'
-  res.send code or 200, new Buffer(if obj then JSON.stringify obj else '')
+  res.status code or 200
+  res.send new Buffer(if obj then JSON.stringify obj else '')
 
 sendError = (res, {code, message, description}) ->
   err = {message}

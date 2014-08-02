@@ -28,7 +28,7 @@
     "compression": "",
     "connect": "",
     "errorhandler": "",
-    "express": "~4.x",
+    "express": "~4.7.x",
     "js-yaml": "",
     "media-typer": "",
     "morgan": "",
