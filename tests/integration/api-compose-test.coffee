@@ -21,8 +21,6 @@ compose = (serializedAst, contentType, cb) ->
 
 
 describe "Composing", ->
-  res = undefined
-
   formats =
     'JSON without Content-Type':
       contentType: null
@@ -34,7 +32,7 @@ describe "Composing", ->
       contentType: 'application/vnd.apiblueprint.ast.raw+yaml'
       serialize: (obj) -> yaml.safeDump obj
 
-  defaultFormat = (format for name, format of formats)[0]
+  defaultFormat = formats['JSON without Content-Type']
 
   bp = """
     # API
@@ -50,6 +48,8 @@ describe "Composing", ->
   for name, format of formats
     do (name, format) ->
       describe "When I POST an AST in #{name}", ->
+        res = undefined
+
         before (done) ->
           compose format.serialize(ast), format.contentType, (err, r) ->
             assert.notOk err
@@ -65,6 +65,8 @@ describe "Composing", ->
           assert.equal res.headers['content-type'], "text/vnd.apiblueprint+markdown; version=1A; charset=utf-8"
 
   describe "When I POST no AST", ->
+    res = undefined
+
     before (done) ->
       compose '', defaultFormat.contentType, (err, r) ->
         assert.notOk err
@@ -78,6 +80,8 @@ describe "Composing", ->
       assert.ok JSON.parse(res.body).message
 
   describe "When I POST an invalid AST", ->
+    res = undefined
+
     before (done) ->
       ast = defaultFormat.serialize
         _verzion: '2.0'
@@ -97,6 +101,8 @@ describe "Composing", ->
       assert.ok JSON.parse(res.body).message
 
   describe "When matter_compiler fails", ->
+    res = undefined
+
     before (done) ->
       sinon.stub blueprint, 'compose', (ast, format, cb) ->
         cb new blueprint.MatterCompilerError 'Ouch!'

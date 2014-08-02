@@ -20,8 +20,6 @@ parse = (blueprint, accept, cb) ->
 
 
 describe "Parsing", ->
-  res = undefined
-
   formats =
     whatever:
       accept: null
@@ -36,7 +34,7 @@ describe "Parsing", ->
       contentType: 'application/vnd.apiblueprint.parseresult.raw+yaml'
       toParseResult: (body) -> yaml.safeLoad body
 
-  defaultFormat = (format for name, format of formats)[0]
+  defaultFormat = formats['whatever']
 
   bp = """
     # API
@@ -56,6 +54,8 @@ describe "Parsing", ->
   for name, format of formats
     do (name, format) ->
       describe "When I POST a blueprint, accepting #{name}", ->
+        res = undefined
+
         before (done) ->
           parse bp, format.accept, (err, r) ->
             assert.notOk err
@@ -75,6 +75,8 @@ describe "Parsing", ->
           assert.equal res.headers['content-type'], "#{format.contentType}; version=1.0"
 
   describe "When I POST no blueprint", ->
+    res = undefined
+
     before (done) ->
       parse '', defaultFormat.accept, (err, r) ->
         assert.notOk err
@@ -98,6 +100,8 @@ describe "Parsing", ->
       assert.notOk defaultFormat.toParseResult(res.body).error
 
   describe "When I POST an invalid blueprint", ->
+    res = undefined
+
     before (done) ->
       parse """
         # API
