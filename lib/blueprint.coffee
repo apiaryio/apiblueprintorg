@@ -33,6 +33,8 @@ class MatterCompilerError extends Error
 # Composes blueprint from AST. Calls given callback with error
 # and a string representing the original blueprint code.
 compose = (ast, format, cb) ->
+  format = format.toLowerCase()
+
   # We have to check wellformness manually, because matter_compiler
   # doesn't handle it itself and fails badly. Can be removed after
   # https://github.com/apiaryio/matter_compiler/issues/5 is closed.
