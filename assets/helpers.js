@@ -150,22 +150,23 @@ timeoutInProgress = false;
 AceRange = null;
 
 handleErrors = function(data, sess, doc, text) {
-  var editorErrors, positioning, _ref, _ref1;
+  var editorErrors, error, loc, positioning, _ref;
   editorErrors = [];
-  if ((data != null ? data.location : void 0) != null) {
-    if ((data != null ? (_ref = data.location) != null ? (_ref1 = _ref[0]) != null ? _ref1.index : void 0 : void 0 : void 0) != null) {
-      positioning = doc.indexToPosition(parseInt(data.location[0].index, 10), 0);
-      editorErrors.push({
-        type: 'error',
-        row: positioning.row,
-        column: positioning.column,
-        html: '<span class="code_errortip">' + data.message.substr(0, 1).toUpperCase() + data.message.slice(1) + '</span>'
-      });
-      sess.setAnnotations(editorErrors);
-    }
-  } else {
-    alert("There was an error with your blueprint code.\n\n" + text);
-  }
+  error = ((data != null ? data.error : void 0) != null) || {
+    message: text
+  };
+  loc = (((_ref = error.location) != null ? _ref[0] : void 0) != null) || {
+    length: 0
+  };
+  loc.index = loc.index || 1;
+  positioning = doc.indexToPosition(parseInt(loc.index, 10), 0);
+  editorErrors.push({
+    type: 'error',
+    row: positioning.row,
+    column: positioning.column,
+    html: '<span class="code_errortip">' + error.message.substr(0, 1).toUpperCase() + error.message.slice(1) + '</span>'
+  });
+  sess.setAnnotations(editorErrors);
 };
 
 handleAst = function(data, sess, doc) {

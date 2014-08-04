@@ -117,18 +117,18 @@ AceRange = null
 
 handleErrors = (data, sess, doc, text) ->
   editorErrors = []
-  if data?.location?
-    if data?.location?[0]?.index?
-      positioning = doc.indexToPosition(parseInt(data.location[0].index, 10), 0)
-      editorErrors.push({
-        type: 'error'
-        row: positioning.row
-        column: positioning.column
-        html: '<span class="code_errortip">' + data.message.substr(0, 1).toUpperCase() + data.message.slice(1) + '</span>'
-      })
-      sess.setAnnotations editorErrors
-  else
-    alert("There was an error with your blueprint code.\n\n#{text}")
+  error = data?.error? or {message: text}
+
+  loc = error.location?[0]? or {length: 0}
+  loc.index = loc.index or 1
+  positioning = doc.indexToPosition(parseInt(loc.index, 10), 0)
+
+  editorErrors.push
+    type: 'error'
+    row: positioning.row
+    column: positioning.column
+    html: '<span class="code_errortip">' + error.message.substr(0, 1).toUpperCase() + error.message.slice(1) + '</span>'
+  sess.setAnnotations editorErrors
   return
 
 handleAst = (data, sess, doc) ->
