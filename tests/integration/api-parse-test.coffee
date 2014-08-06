@@ -14,8 +14,7 @@ parse = (blueprint, accept, cb) ->
   request.post
     url: "#{URL_PREFIX}/parser"
     body: blueprint
-    headers:
-      'Accept': accept
+    headers: if accept then {'Accept': accept} else {}
   , cb
 
 

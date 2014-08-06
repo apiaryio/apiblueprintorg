@@ -118,7 +118,12 @@ exports.setup = (app) ->
       res.set 'X-Parser-Time', formatTime process.hrtime t
       res.statusCode = if result.error and result.error.code isnt 0 then 400 else 200
 
-      if req.accepts 'application/vnd.apiblueprint.parseresult.raw+yaml'
+      accepted = req.accepts [
+        'application/vnd.apiblueprint.parseresult.raw+json',
+        'application/vnd.apiblueprint.parseresult.raw+yaml'
+      ]
+
+      if accepted is 'application/vnd.apiblueprint.parseresult.raw+yaml'
         res.set 'Content-Type', 'application/vnd.apiblueprint.parseresult.raw+yaml; version=1.0'
         body = yaml.safeDump JSON.parse JSON.stringify result  # https://github.com/nodeca/js-yaml/issues/132
       else
