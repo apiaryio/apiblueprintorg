@@ -97,7 +97,6 @@ getAST = function(code, thenBack) {
     return;
   }
   promise.post(window.astParserURI + '?_t=' + (1 * (new Date())), code, {
-    "Content-type": 'application/x-www-form-urlencoded; charset=utf-8',
     "Accept": "vnd.apiblueprint.parseresult.raw+json"
   }).then(function(err, text, xhr) {
     args = [err, text, code];
@@ -150,12 +149,12 @@ timeoutInProgress = false;
 AceRange = null;
 
 handleErrors = function(data, sess, doc, text) {
-  var editorErrors, error, loc, positioning, _ref;
+  var editorErrors, error, loc, positioning, _ref, _ref1, _ref2;
   editorErrors = [];
-  error = ((data != null ? data.error : void 0) != null) || {
+  error = (_ref = data != null ? data.error : void 0) != null ? _ref : {
     message: text
   };
-  loc = (((_ref = error.location) != null ? _ref[0] : void 0) != null) || {
+  loc = (_ref1 = (_ref2 = error.location) != null ? _ref2[0] : void 0) != null ? _ref1 : {
     length: 0
   };
   loc.index = loc.index || 1;
@@ -216,8 +215,8 @@ handleData = function(sess, doc, data, code) {
     sess.removeMarker(oneMarker);
   }
   allMarkers = [];
-  if (data) {
-    renderAST(JSON.stringify((data.ast ? data.ast : data), null, '\t'), -1);
+  if (data != null ? data.ast : void 0) {
+    renderAST(JSON.stringify(data.ast, null, '\t'), -1);
   }
   return data;
 };
@@ -239,12 +238,9 @@ sendCode = function() {
     sess = editors['editor_ace'].getSession();
     doc = sess.getDocument();
     data = handleData(sess, doc, data, code);
-    if (err && text) {
+    if (err) {
       handleErrors(data, sess, doc, text);
-    } else if (err && !text) {
-      alert('Error sending blueprint code to server for elementary parser check.');
-      return;
-    } else if (!err && text) {
+    } else if (text) {
       handleAst(data, sess, doc);
     }
   });
