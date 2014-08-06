@@ -73,7 +73,6 @@ getAST = (code, thenBack) ->
     return
 
   promise.post(window.astParserURI + '?_t=' + ( 1 * ( new Date() ) ), code, {
-    "Content-type": 'application/x-www-form-urlencoded; charset=utf-8'
     "Accept": "vnd.apiblueprint.parseresult.raw+json"
   }).then (err, text, xhr) ->
     args = [err, text, code]
@@ -117,18 +116,18 @@ AceRange = null
 
 handleErrors = (data, sess, doc, text) ->
   editorErrors = []
-  if data?.location?
-    if data?.location?[0]?.index?
-      positioning = doc.indexToPosition(parseInt(data.location[0].index, 10), 0)
-      editorErrors.push({
-        type: 'error'
-        row: positioning.row
-        column: positioning.column
-        html: '<span class="code_errortip">' + data.message.substr(0, 1).toUpperCase() + data.message.slice(1) + '</span>'
-      })
-      sess.setAnnotations editorErrors
-  else
-    alert("There was an error with your blueprint code.\n\n#{text}")
+  error = data?.error ? {message: text}
+
+  loc = error.location?[0] ? {length: 0}
+  loc.index = loc.index or 1
+  positioning = doc.indexToPosition(parseInt(loc.index, 10), 0)
+
+  editorErrors.push
+    type: 'error'
+    row: positioning.row
+    column: positioning.column
+    html: '<span class="code_errortip">' + error.message.substr(0, 1).toUpperCase() + error.message.slice(1) + '</span>'
+  sess.setAnnotations editorErrors
   return
 
 handleAst = (data, sess, doc) ->
@@ -167,8 +166,8 @@ handleData = (sess, doc, data, code) ->
   while oneMarker = allMarkers.shift()
     sess.removeMarker oneMarker
   allMarkers = []
-  if data
-    renderAST(JSON.stringify((if data.ast then data.ast else data), null, '\t'), -1)
+  if data?.ast
+    renderAST(JSON.stringify(data.ast, null, '\t'), -1)
   return data
 
 sendCode = ->
@@ -187,12 +186,9 @@ sendCode = ->
     doc = sess.getDocument()
     data = handleData sess, doc, data, code
 
-    if err and text
+    if err
       handleErrors(data, sess, doc, text)
-    else if err and not text
-      alert 'Error sending blueprint code to server for elementary parser check.'
-      return
-    else if not err and text
+    else if text
       handleAst(data, sess, doc)
     return
 
