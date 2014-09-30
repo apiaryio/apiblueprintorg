@@ -1,0 +1,2 @@
+#!/usr/bin/env ruby
+require 'library.rb'  # this is because regexp in blueprint.coffee is looking for .rb extensions
