@@ -65,7 +65,9 @@ compose = (ast, format, cb) ->
     if stderr
       if RUBY_TRACE_REGEXP.test stderr
         err = new MatterCompilerError stderr
-        log.error 'MATTER_COMPILER_FAILED: ', err, '- given AST:', ast
+        err.ast = ast
+        firstLine = stderr.split('\n')[0] or ''
+        log.error "MATTER_COMPILER_FAILED: #{firstLine}", err
       else
         err = new Error stderr
         log.debug 'Cannot compose blueprint from AST', err
@@ -77,7 +79,6 @@ compose = (ast, format, cb) ->
   matterCompiler.stdin.end()
 
 
-# Export
 module.exports = {
   parse
   compose
