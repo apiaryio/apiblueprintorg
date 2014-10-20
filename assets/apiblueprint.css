@@ -240,6 +240,7 @@ a:hover{color:#fff;border-bottom:1px solid #fff;text-decoration:none}
 .tooling__ico--construction.tooling__sublime-plugin,.tooling__ico--construction.tooling__dredd,.tooling__ico--construction.tooling__blueprint-docify,.tooling__soapui,.tooling__ico--construction.tooling__atom,.tooling__ico--construction.tooling__aglio{background-position:center center;background-repeat:no-repeat;-webkit-background-size:auto 60px;-moz-background-size:auto 60px;background-size:auto 60px}
 .tooling__ico--construction.tooling__dredd{background-image:url("dredd.png")}
 .tooling__ico--construction.tooling__blueprint-docify{background-image:url("blueprint-docify.png")}
+.tooling__ico--construction.tooling__vrest{background-image:url("vrest.png");background-position: -10px -44px; height: 31px; width: 102px;}
 .tooling__ico--construction.tooling__sublime-plugin{background-image:url("st2.png")}
 .tooling__ico--construction.tooling__atom{background-image:url("atom.png")}
 .tooling__ico--construction.tooling__aglio{background-image:url("aglio.png")}
