@@ -3,4 +3,4 @@ lsi:          false
 highlighter:  pygments
 url:          http://apiblueprint.org
 include:      ['favicon.png', 'favicon.ico', 'apple-touch-icon-precomposed.png']
-exclude:      ['*.styl', '*.coffee']
+exclude:      ['*.styl', '*.coffee', 'node_modules']

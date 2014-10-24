@@ -1,3 +1,5 @@
+@import 'nib'
+
 $gutter = 1em
 $color = #f43059
 $green = #40f6bb
@@ -33,8 +35,6 @@ $preformated = #bca6ff
 
 $horizSpace = 2em
 $space = 1em
-
-@import 'nib'
 
 html
   font: 0.75em/1.25 sans-serif
@@ -262,6 +262,7 @@ h1
     box-sizing: border-box
     width: 44%
     text-decoration none
+    white-space nowrap
     &:hover
       text-decoration none
 
@@ -1302,6 +1303,8 @@ a
 
   &.tooling__sublime-plugin
   &.tooling__dredd
+  &.tooling__blueprint_docify
+  &.tooling__blueprint_vrest
   &.tooling__atom
   &.tooling__aglio
   &.tooling__soapui
@@ -1318,6 +1321,11 @@ a
     background-image url('aglio.png')
   &.tooling__soapui
     background-image url('soapui-pro.png')
+  &.tooling__vrest
+    background-image url('vrest.png')
+    background-position -10px -44px
+    height 31px
+    width 102px
 
 .tooling__ico--question
   position relative
