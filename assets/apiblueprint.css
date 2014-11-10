@@ -1572,6 +1572,12 @@ a:hover {
   height: 31px;
   width: 102px;
 }
+.tooling__ico--construction.tooling__vigia {
+  background-image: url("vigia.png");
+  background-position: center center;
+  height: 64px;
+  width: 64px;
+}
 .tooling__ico--question {
   position: relative;
 }
