@@ -1544,7 +1544,8 @@ a:hover {
 .tooling__ico--construction.tooling__blueprint_vrest,
 .tooling__ico--construction.tooling__atom,
 .tooling__ico--construction.tooling__aglio,
-.tooling__ico--construction.tooling__soapui {
+.tooling__ico--construction.tooling__soapui,
+.tooling__ico--construction.tooling__paw {
   background-position: center center;
   background-repeat: no-repeat;
   -webkit-background-size: auto 60px;
@@ -1577,6 +1578,9 @@ a:hover {
   background-position: center center;
   height: 64px;
   width: 64px;
+}
+.tooling__ico--construction.tooling__paw {
+  background-image: url("paw.png");
 }
 .tooling__ico--question {
   position: relative;
