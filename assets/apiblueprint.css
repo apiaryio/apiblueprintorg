@@ -1555,6 +1555,11 @@ a:hover {
 .tooling__ico--construction.tooling__dredd {
   background-image: url("dredd.png");
 }
+.tooling__ico--construction.tooling__drakov {
+  background-image: url("drakov.png");
+  background-size: 60px 60px;
+  background-position: 0 0;
+}
 .tooling__ico--construction.tooling__sublime-plugin {
   background-image: url("st2.png");
 }
