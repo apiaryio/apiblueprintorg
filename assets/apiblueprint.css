@@ -388,11 +388,38 @@ h1 {
   list-style-type: none;
   padding: 0;
   margin: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -o-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-line-pack: stretch;
+  -webkit-align-content: stretch;
+  align-content: stretch;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -o-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
 }
 /* three items */
 .versus__item:first-child:nth-last-child(3),
 .versus__item:first-child:nth-last-child(3) ~ .versus__item {
-  width: 33.3333%;
+  width: 33.333%;
 }
 /* four items */
 .versus__item:first-child:nth-last-child(4),
@@ -1203,7 +1230,33 @@ a:hover {
   padding: 0 0 3em 0;
   margin: 0 0 0 -3em;
   list-style-type: none;
-  display: block;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -moz-box-orient: horizontal;
+  -o-box-orient: horizontal;
+  -webkit-flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -webkit-box-lines: multiple;
+  -moz-box-lines: multiple;
+  -o-box-lines: multiple;
+  -webkit-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-line-pack: stretch;
+  -webkit-align-content: stretch;
+  align-content: stretch;
+  -webkit-box-align: stretch;
+  -moz-box-align: stretch;
+  -o-box-align: stretch;
+  -ms-flex-align: stretch;
+  -webkit-align-items: stretch;
+  align-items: stretch;
 }
 .binding__item {
   position: relative;
@@ -1538,58 +1591,76 @@ a:hover {
   height: 62px;
   width: 65px;
 }
-.tooling__ico--construction.tooling__sublime-plugin,
-.tooling__ico--construction.tooling__dredd,
-.tooling__ico--construction.tooling__blueprint_docify,
-.tooling__ico--construction.tooling__blueprint_vrest,
-.tooling__ico--construction.tooling__atom,
-.tooling__ico--construction.tooling__aglio,
-.tooling__ico--construction.tooling__soapui,
-.tooling__ico--construction.tooling__paw,
-.tooling__ico--construction.tooling__apimatic{
+.tooling__ico__logo.tooling__someTool,
+.tooling__ico__logo.tooling__aglio,
+.tooling__ico__logo.tooling__apimatic,
+.tooling__ico__logo.tooling__atom,
+.tooling__ico__logo.tooling__blueprint-docify,
+.tooling__ico__logo.tooling__drakov,
+.tooling__ico__logo.tooling__dredd,
+.tooling__ico__logo.tooling__paw,
+.tooling__ico__logo.tooling__sandbox,
+.tooling__ico__logo.tooling__soapui-pro,
+.tooling__ico__logo.tooling__st2,
+.tooling__ico__logo.tooling__vigia,
+.tooling__ico__logo.tooling__vrest {
+  height: 62px;
+  width: 65px;
   background-position: center center;
   background-repeat: no-repeat;
   -webkit-background-size: auto 60px;
   -moz-background-size: auto 60px;
   background-size: auto 60px;
+  background-image: url("logo.png");
 }
-.tooling__ico--construction.tooling__dredd {
-  background-image: url("dredd.png");
-}
-.tooling__ico--construction.tooling__drakov {
-  background-image: url("drakov.png");
-  background-size: 60px 60px;
-  background-position: 0 0;
-}
-.tooling__ico--construction.tooling__sublime-plugin {
-  background-image: url("st2.png");
-}
-.tooling__ico--construction.tooling__atom {
-  background-image: url("atom.png");
-}
-.tooling__ico--construction.tooling__aglio {
+.tooling__ico__logo.tooling__aglio {
   background-image: url("aglio.png");
 }
-.tooling__ico--construction.tooling__soapui {
-  background-image: url("soapui-pro.png");
+.tooling__ico__logo.tooling__apimatic {
+  background-image: url("apimatic.png");
 }
-.tooling__ico--construction.tooling__vrest {
-  background-image: url("vrest.png");
-  background-position: -10px -44px;
-  height: 31px;
-  width: 102px;
+.tooling__ico__logo.tooling__atom {
+  background-image: url("atom.png");
 }
-.tooling__ico--construction.tooling__vigia {
-  background-image: url("vigia.png");
-  background-position: center center;
-  height: 64px;
-  width: 64px;
+.tooling__ico__logo.tooling__blueprint-docify {
+  background-image: url("blueprint-docify.png");
 }
-.tooling__ico--construction.tooling__paw {
+.tooling__ico__logo.tooling__drakov {
+  background-image: url("drakov.png");
+}
+.tooling__ico__logo.tooling__dredd {
+  background-image: url("dredd.png");
+}
+.tooling__ico__logo.tooling__paw {
   background-image: url("paw.png");
 }
-.tooling__ico--construction.tooling__apimatic {
-  background-image: url("apimatic.png");
+.tooling__ico__logo.tooling__sandbox {
+  background-image: url("sandbox.png");
+}
+.tooling__ico__logo.tooling__soapui-pro {
+  background-image: url("soapui-pro.png");
+}
+.tooling__ico__logo.tooling__st2 {
+  background-image: url("st2.png");
+}
+.tooling__ico__logo.tooling__vigia {
+  background-image: url("vigia.png");
+}
+.tooling__ico__logo.tooling__vrest {
+  background-image: url("vrest.png");
+}
+.tooling__ico__logo.tooling__blueprint-docify {
+  -webkit-background-size: 62px;
+  -moz-background-size: 62px;
+  background-size: 62px;
+}
+.tooling__ico__logo.tooling__vrest {
+  background-position: -10px -44px;
+  -webkit-background-size: auto;
+  -moz-background-size: auto;
+  background-size: auto;
+  height: 31px;
+  width: 102px;
 }
 .tooling__ico--question {
   position: relative;

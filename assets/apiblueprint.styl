@@ -40,7 +40,7 @@ html
   font: 0.75em/1.25 sans-serif
   font-family: 'Proxima Nova', Helvetica, Arial, sans-serif
   background-color: $violet
-  color: #fff
+  color $white
 
 .logo
 .started__question
@@ -106,7 +106,7 @@ html
   font-size: 40px
   font-family: 'Proxima Nova', Helvetica, Arial, sans-serif
   text-align: center
-  color: rgba(255, 255, 255, 1)
+  color: $white
   transition all 0.5s linear
   @media screen and (max-width:760px)
     font-size: 30px
@@ -336,14 +336,19 @@ h1
     background-color: rgba(255,255,255,0.001)
 
 .versus__block
-  list-style-type: none
+  list-style-type none
   padding: 0
   margin: 0
+  display flex
+  flex-direction row
+  flex-wrap wrap
+  align-content stretch
+  align-items stretch
 
 /* three items */
 .versus__item:first-child:nth-last-child(3)
 .versus__item:first-child:nth-last-child(3) ~ .versus__item
-  width 33.3333%
+  width 33.333%
 
 /* four items */
 .versus__item:first-child:nth-last-child(4)
@@ -1019,7 +1024,11 @@ a
   padding 0 0 3em 0
   margin 0 0 0 -3em
   list-style-type none
-  display block
+  display flex
+  flex-direction row
+  flex-wrap wrap
+  align-content stretch
+  align-items stretch
 
 .binding__item
   position relative
@@ -1301,33 +1310,41 @@ a
   height 62px
   width 65px
 
-  &.tooling__sublime-plugin
-  &.tooling__dredd
-  &.tooling__blueprint_docify
-  &.tooling__blueprint_vrest
-  &.tooling__atom
-  &.tooling__aglio
-  &.tooling__soapui
+.tooling__ico__logo
+  &.tooling__someTool
+    height 62px
+    width 65px
     background-position center center
     background-repeat no-repeat
     background-size auto 60px
-  &.tooling__dredd
-    background-image url('dredd.png')
-  &.tooling__dredd
-    background-image url('dredd.png')
-    background-size 60px 60px
-    background-position 0 0
-  &.tooling__sublime-plugin
-    background-image url('st2.png')
-  &.tooling__atom
-    background-image url('atom.png')
-  &.tooling__aglio
-    background-image url('aglio.png')
-  &.tooling__soapui
-    background-image url('soapui-pro.png')
+    background-image url('logo.png')
+
+  // List of Tools, please keep it as a comma-delimited list of strings
+  // wrapped inside apostrophes, so it is parsed by Stylus as an Array
+  $tools = 'aglio',
+    'apimatic',
+    'atom',
+    'blueprint-docify',
+    'drakov',
+    'dredd',
+    'paw',
+    'sandbox',
+    'soapui-pro',
+    'st2',
+    'vigia',
+    'vrest'
+
+  for $tool in $tools
+    &.tooling__{$tool}
+      @extend .tooling__ico__logo.tooling__someTool
+      background-image url($tool.png)
+
+  // specific Tools overrides
+  &.tooling__blueprint-docify
+    background-size 62px
   &.tooling__vrest
-    background-image url('vrest.png')
     background-position -10px -44px
+    background-size auto
     height 31px
     width 102px
 
@@ -1585,8 +1602,8 @@ a
 
 .ace_editor
   .ace_gutter-tooltip
-    background #FFF
-    box-shadow none 
+    background $white
+    box-shadow none
 
 .examples__json
   .ace_line
