@@ -45,14 +45,39 @@ describe "Parsing", ->
         done null
     it "I get the right AST", ->
       assert.deepEqual result.ast,
-        _version: '2.0'
+        _version: '3.0'
         metadata: []
         name: 'API'
         description: ''
+        element: 'category'
+        content: [
+          element: 'category'
+          content: [
+            element: 'resource'
+            name: ''
+            description: ''
+            model: {}
+            parameters: []
+            uriTemplate: '/message'
+            actions: [
+              attributes:
+                relation: ''
+                uriTemplate: ''
+              content: []
+              description: ''
+              examples: []
+              method: 'GET'
+              name: ''
+              parameters: []
+            ]
+            content: []
+          ]
+        ]
         resourceGroups: [
           name: ''
           description: ''
           resources: [
+            element: 'resource'
             name: ''
             description: ''
             uriTemplate: '/message'
@@ -64,7 +89,12 @@ describe "Parsing", ->
               method: 'GET'
               parameters: []
               examples: []
+              attributes:
+                relation: ''
+                uriTemplate: ''
+              content: []
             ]
+            content: []
           ]
         ]
     it "I get no error", ->
@@ -91,14 +121,59 @@ describe "Parsing", ->
         done null
     it "I get the right AST", ->
       assert.deepEqual result.ast,
-        _version: '2.0'
+        _version: '3.0'
         metadata: []
+        element: 'category'
         name: 'API'
         description: ''
+        content: [
+          element: 'category'
+          content: [
+            element: 'resource'
+            name: ''
+            description: ''
+            uriTemplate: '/message'
+            parameters: []
+            model: {}
+            actions: [
+              name: ''
+              description: ''
+              method: 'GET'
+              parameters: []
+              attributes:
+                relation: ''
+                uriTemplate: ''
+              examples: [
+                name: ''
+                description: ''
+                requests: []
+                responses: [
+                  name: '200'
+                  description: ''
+                  body: 'Hello World!\n'
+                  headers: [
+                    name: 'Content-Type'
+                    value: 'text/plain'
+                  ]
+                  schema: ''
+                  content: [
+                    element: 'asset'
+                    attributes:
+                      role: 'bodyExample'
+                    content: 'Hello World!\n'
+                  ]
+                ]
+              ]
+              content: []
+            ]
+            content: []
+          ]
+        ]
         resourceGroups: [
           name: ''
           description: ''
           resources: [
+            element: 'resource'
             name: ''
             description: ''
             uriTemplate: '/message'
@@ -107,6 +182,9 @@ describe "Parsing", ->
             actions: [
               name: ''
               description: ''
+              attributes:
+                relation: ''
+                uriTemplate: ''
               method: 'GET'
               parameters: []
               examples: [
@@ -122,9 +200,17 @@ describe "Parsing", ->
                   ]
                   body: 'Hello World!\n'
                   schema: ''
+                  content: [
+                    element: 'asset'
+                    attributes:
+                      role: 'bodyExample'
+                    content: 'Hello World!\n'
+                  ]
                 ]
               ]
+              content: []
             ]
+            content: []
           ]
         ]
     it "I get no error", ->
