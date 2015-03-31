@@ -43,11 +43,14 @@ describe "Parsing", ->
   result =
     _version: '1.0'
     ast:
-      _version: '2.0'
+      _version: '3.0'
       metadata: []
+      element: 'category'
       name: 'API'
       description: 'Hello World!'
       resourceGroups: []
+      content: []
+    sourcemap: null
     warnings: []
     error: null
 
@@ -88,11 +91,14 @@ describe "Parsing", ->
       assert.deepEqual
         _version: '1.0'
         ast:
-          _version: '2.0'
+          _version: '3.0'
           metadata: []
+          element: ''
           name: ''
           description: ''
           resourceGroups: []
+          content: []
+        sourcemap: null
         warnings: []
         error: null
       , defaultFormat.toParseResult res.body
