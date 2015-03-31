@@ -24,6 +24,7 @@ This repository contains an [apiblueprint.org](http://apiblueprint.org) site. Pl
 ### Tips for development
 
 - install by `npm install`
+- install Ruby dependencies with `bundle install`
 - run the app by `coffee app.coffee`
 - install `gulp` globally `npm install -g gulp`
 - develop with `gulp tdd`
