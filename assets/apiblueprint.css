@@ -1605,7 +1605,8 @@ a:hover {
 .tooling__ico__logo.tooling__soapui-pro,
 .tooling__ico__logo.tooling__st2,
 .tooling__ico__logo.tooling__vigia,
-.tooling__ico__logo.tooling__vrest {
+.tooling__ico__logo.tooling__vrest,
+.tooling__ico__logo.tooling__dredd-rack {
   height: 62px;
   width: 65px;
   background-position: center center;
@@ -1667,6 +1668,9 @@ a:hover {
   height: 31px;
   width: 102px;
 }
+.tooling__ico__logo.tooling__dredd-rack {
+  background-image: url("dredd-rack.png");
+}
 .tooling__ico--question {
   position: relative;
 }
@@ -1705,6 +1709,14 @@ a:hover {
   transform: rotate(88deg) skewX(30deg) skewY(321deg);
   top: 3px;
   margin: 0 20px 0 0;
+}
+@media only screen and (-moz-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3/2), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi) {
+  .tooling__ico__logo.tooling__dredd-rack {
+    background-image: url("dredd-rack@2x.png");
+    -webkit-background-size: 62px auto;
+    -moz-background-size: 62px auto;
+    background-size: 62px auto;
+  }
 }
 .fork__link {
   -webkit-box-sizing: border-box;
