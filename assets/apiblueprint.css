@@ -1596,6 +1596,7 @@ a:hover {
 .tooling__ico__logo.tooling__aglio,
 .tooling__ico__logo.tooling__apimatic,
 .tooling__ico__logo.tooling__atom,
+.tooling__ico__logo.tooling__vim,
 .tooling__ico__logo.tooling__blueprint-docify,
 .tooling__ico__logo.tooling__drakov,
 .tooling__ico__logo.tooling__dredd,
@@ -1624,6 +1625,9 @@ a:hover {
 }
 .tooling__ico__logo.tooling__atom {
   background-image: url("atom.png");
+}
+.tooling__ico__logo.tooling__vim {
+  background-image: url("vim.png");
 }
 .tooling__ico__logo.tooling__blueprint-docify {
   background-image: url("blueprint-docify.png");
