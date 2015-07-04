@@ -1601,6 +1601,7 @@ a:hover {
 .tooling__ico__logo.tooling__drakov,
 .tooling__ico__logo.tooling__dredd,
 .tooling__ico__logo.tooling__grape-apiary,
+.tooling__ico__logo.tooling__hercule,
 .tooling__ico__logo.tooling__paw,
 .tooling__ico__logo.tooling__sandbox,
 .tooling__ico__logo.tooling__soapui-pro,
@@ -1641,6 +1642,9 @@ a:hover {
 }
 .tooling__ico__logo.tooling__grape-apiary {
   background-image: url("grape.png");
+}
+.tooling__ico__logo.tooling__hercule {
+  background-image: url("hercule.png");
 }
 .tooling__ico__logo.tooling__paw {
   background-image: url("paw.png");
