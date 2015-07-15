@@ -1609,7 +1609,8 @@ a:hover {
 .tooling__ico__logo.tooling__vigia,
 .tooling__ico__logo.tooling__vrest,
 .tooling__ico__logo.tooling__hyperdrive,
-.tooling__ico__logo.tooling__dredd-rack {
+.tooling__ico__logo.tooling__dredd-rack,
+.tooling__ico__logo.tooling__api-blueprint-focus-booster {
   height: 62px;
   width: 65px;
   background-position: center center;
@@ -1682,6 +1683,9 @@ a:hover {
 }
 .tooling__ico__logo.tooling__dredd-rack {
   background-image: url("dredd-rack.png");
+}
+.tooling__ico__logo.tooling__api-blueprint-focus-booster {
+  background-image: url("api-blueprint-focus-booster.png");
 }
 .tooling__ico--question {
   position: relative;
