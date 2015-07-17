@@ -1610,7 +1610,8 @@ a:hover {
 .tooling__ico__logo.tooling__vrest,
 .tooling__ico__logo.tooling__hyperdrive,
 .tooling__ico__logo.tooling__dredd-rack,
-.tooling__ico__logo.tooling__api-blueprint-focus-booster {
+.tooling__ico__logo.tooling__api-blueprint-focus-booster,
+.tooling__ico__logo.tooling__gelato {
   height: 62px;
   width: 65px;
   background-position: center center;
@@ -1686,6 +1687,9 @@ a:hover {
 }
 .tooling__ico__logo.tooling__api-blueprint-focus-booster {
   background-image: url("api-blueprint-focus-booster.png");
+}
+.tooling__ico__logo.tooling__gelato {
+  background-image: url("gelato.png");
 }
 .tooling__ico--question {
   position: relative;
