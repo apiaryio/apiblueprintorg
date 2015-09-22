@@ -1546,7 +1546,8 @@ a:hover {
 .tooling__ico--construction.tooling__aglio,
 .tooling__ico--construction.tooling__soapui,
 .tooling__ico--construction.tooling__paw,
-.tooling__ico--construction.tooling__apimatic{
+.tooling__ico--construction.tooling__apimatic,
+.tooling__ico--construction.tooling__apitransformer{
   background-position: center center;
   background-repeat: no-repeat;
   -webkit-background-size: auto 60px;
@@ -1590,6 +1591,9 @@ a:hover {
 }
 .tooling__ico--construction.tooling__apimatic {
   background-image: url("apimatic.png");
+}
+.tooling__ico--construction.tooling__apitransformer {
+  background-image: url("apitransformer.png");
 }
 .tooling__ico--question {
   position: relative;
