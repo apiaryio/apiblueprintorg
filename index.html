@@ -1,4 +1,4 @@
-﻿---
+---
 ---
 <!DOCTYPE html>
 <html lang="en">
@@ -472,19 +472,19 @@ Delete a message. **Warning:** This action **permanently** removes the message f
     <article class="started__texts">
       <a name="get-started" id="get-started"></a>
       <h2 class="page__title">Get Started</h2>
-      <p class="started__texts--subheading">Use the reference API Blueprint parser – <a href="https://github.com/apiaryio/snowcrash">Snow Crash</a> or one of its <a href="#bindings">bindings</a>.</p>
+      <p class="started__texts--subheading">Use the reference API Blueprint parser – <a href="https://github.com/apiaryio/drafter">Drafter</a> or one of its <a href="#bindings">bindings</a>.</p>
       <section>
-        <h3>Get Snow Crash</h3>
+        <h3>Get Drafter</h3>
         <pre><code class="pre">$ brew install --HEAD \
-  https://raw.github.com/apiaryio/snowcrash/master/tools/homebrew/snowcrash.rb</code></pre>
+  https://raw.github.com/apiaryio/drafter/master/tools/homebrew/drafter.rb</code></pre>
         <p class="subnotes">
-          Build notes for platforms: <a href="https://github.com/apiaryio/snowcrash#snow-crash-command-line-tool">Linux</a>,
-          <a href="https://github.com/apiaryio/snowcrash/wiki/Building-on-Windows">Windows</a>
+          Build notes for platforms: <a href="https://github.com/apiaryio/drafter#drafter-command-line-tool">Linux</a>,
+          <a href="https://github.com/apiaryio/drafter/wiki/Building-on-Windows">Windows</a>
         </p>
       </section>
       <section>
         <h3>Create your first API</h3>
-        <pre><code><span class="pre">$ <strong>cat &lt;&lt; 'EOF' | snowcrash --format json</strong></span>
+        <pre><code><span class="pre">$ <strong>cat &lt;&lt; 'EOF' | drafter --format json</strong></span>
 <span class="pre"># My API</span>
 <span class="pre">## GET /message</span>
 <span class="pre">+ Response 200 (text/plain)</span>
@@ -520,7 +520,7 @@ Delete a message. **Warning:** This action **permanently** removes the message f
    --><li class="binding__item binding__item--link"><span class="binding__item--link--border"></span>
         Did not find yours?
         <br>
-        <a href="https://github.com/apiaryio/snowcrash/wiki/Writing-a-binding" class="button__link button__link--green">Contribute</a>
+        <a href="https://github.com/apiaryio/drafter/wiki/Writing-a-binding" class="button__link button__link--green">Contribute</a>
       </li>
     </ul>
     <h2 class="page__title">Tooling</h2>
@@ -533,13 +533,13 @@ Delete a message. **Warning:** This action **permanently** removes the message f
         </div></li>
 
       <li class="tooling__item"><div class="tooling__item--wrap">
-        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__dredd"></span></span><!--
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__dredd"></span></span><!--
      --><h3 class="tooling__title"><a href="https://github.com/apiaryio/dredd" class="block larger"><span class="block">Dredd</span><span class="tooling__link"></span></a> <span class="block smaller">API Blueprint testing tool</span></h3><!--
      --><p class="tooling__text">Plug your API Blueprint into the CI and get no more outdated API documentation.</p>
         </div></li>
 
       <li class="tooling__item"><div class="tooling__item--wrap">
-        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__drakov"></span></span><!--
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__drakov"></span></span><!--
      --><h3 class="tooling__title"><a href="https://www.npmjs.com/package/drakov" class="block larger"><span class="block">Drakov</span><span class="tooling__link"></span></a> <span class="block smaller">API Blueprint Mock Server In Node.js</span></h3><!--
      --><p class="tooling__text">Mock server that implements the API Blueprint specification, with a few extras rolled in. Usable as both a standalone server as well as a Node.js module.</p>
         </div></li>
@@ -563,19 +563,31 @@ Delete a message. **Warning:** This action **permanently** removes the message f
         </div></li>
 
       <li class="tooling__item"><div class="tooling__item--wrap">
-        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__sublime-plugin"></span></span><!--
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__st2"></span></span><!--
      --><h3 class="tooling__title"><a href="https://github.com/apiaryio/api-blueprint-sublime-plugin" class="block larger"><span class="block">Sublime Text plugin</span><span class="tooling__link"></span></a> <span class="block smaller">Parse API Blueprint with a hotkey</span></h3><!--
-     --><p class="tooling__text">API Blueprint syntax highlighting, live validation and parsing in your favorite text editor.</p>
+     --><p class="tooling__text">API Blueprint &amp; MSON syntax highlighting, live validation and parsing in your favorite text editor.</p>
         </div></li>
 
+        <li class="tooling__item"><div class="tooling__item--wrap">
+          <span class="tooling__ico"><span class="tooling__ico__logo tooling__atom"></span></span><!--
+       --><h3 class="tooling__title"><a href="https://atom.io/packages/language-api-blueprint" class="block larger"><span class="block">Atom editor language</span><span class="tooling__link"></span></a> <span class="block smaller">API Blueprint grammar</span></h3><!--
+       --><p class="tooling__text">API Blueprint &amp; MSON syntax highlighting.</p>
+          </div></li>
+
       <li class="tooling__item"><div class="tooling__item--wrap">
-        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__atom"></span></span><!--
-     --><h3 class="tooling__title"><a href="https://atom.io/packages/api-blueprint-preview" class="block larger"><span class="block">Atom editor plugin</span><span class="tooling__link"></span></a> <span class="block smaller">Plugin for API Blueprint Preview</span></h3><!--
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__atom"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://atom.io/packages/api-blueprint-preview" class="block larger"><span class="block">Atom editor preview</span><span class="tooling__link"></span></a> <span class="block smaller">Plugin for API Blueprint Preview</span></h3><!--
      --><p class="tooling__text">Preview HTML Blueprint in the editor.</p>
         </div></li>
 
       <li class="tooling__item"><div class="tooling__item--wrap">
-        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__aglio"></span></span><!--
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__vim"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/kylef/apiblueprint.vim" class="block larger"><span class="block">Vim editor plugin</span><span class="tooling__link"></span></a> <span class="block smaller">API Blueprint plugin for Vim</span></h3><!--
+     --><p class="tooling__text">API Blueprint syntax highlighting and integration with Vim.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__aglio"></span></span><!--
      --><h3 class="tooling__title"><a href="https://github.com/danielgtaylor/aglio" class="block larger"><span class="block">Aglio</span><span class="tooling__link"></span></a> <span class="block smaller">Custom API blueprint formatter</span></h3><!--
      --><p class="tooling__text">Render HTML from API blueprint files, with support for custom themes. Executable and asynchronous Node.js library.</p>
         </div></li>
@@ -611,7 +623,7 @@ Delete a message. **Warning:** This action **permanently** removes the message f
         </div></li>
 
       <li class="tooling__item"><div class="tooling__item--wrap">
-        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__blueprint-docify"></span></span><!--
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__blueprint-docify"></span></span><!--
      --><h3 class="tooling__title"><a href="https://github.com/renewablefunding/blueprint-docify" class="block larger"><span class="block">Blueprint docify</span><span class="tooling__link"></span></a> <span class="block smaller">Autogenerate pretty API docs</span></h3><!--
      --><p class="tooling__text">Add your API spec in the root of your repo and push! It will make great API docs for each branch, which are available at <code>http://org.github.io/repo/branch</code></p>
         </div></li>
@@ -623,25 +635,25 @@ Delete a message. **Warning:** This action **permanently** removes the message f
         </div></li>
 
       <li class="tooling__item"><div class="tooling__item--wrap">
-        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__soapui"></span></span><!--
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__soapui-pro"></span></span><!--
      --><h3 class="tooling__title"><a href="https://smartbear.com/products/qa-tools/web-service-testing-tool/free-soapui-trial/" class="block larger"><span class="block">API Blueprint Plugin for SoapUI Pro</span><span class="tooling__link"></span></a> <span class="block smaller">Import/Export API Blueprint from SoapUI Pro</span></h3><!--
      --><p class="tooling__text">This plugin is available for SoapUI Pro versions 5.1 and above. The plugin allows you import API Blueprint files into SoapUI Pro for testing and mocking, as well as generate an API Blueprint file for any REST API defined in SoapUI Pro. You can get the plugin by downloading a version of SoapUI Pro.</code></p>
         </div></li>
 
       <li class="tooling__item"><div class="tooling__item--wrap">
-        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__vrest"></span></span><!--
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__vrest"></span></span><!--
      --><h3 class="tooling__title"><a href="http://vrest.io/" class="block larger"><span class="block">vREST.io</span><span class="tooling__link"></span></a> <span class="block smaller">Import API Blueprint into vREST </span></h3><!--
      --><p class="tooling__text">This tool allows you to record, specify, mock and test your web APIs. You can import existing API Blueprints into this tool.</code></p>
         </div></li>
 
       <li class="tooling__item"><div class="tooling__item--wrap">
-        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__sandbox"></span></span><!--
      --><h3 class="tooling__title"><a href="https://getsandbox.com" class="block larger"><span class="block">Sandbox</span><span class="tooling__link"></span></a> <span class="block smaller">Programmatic mock server</span></h3><!--
      --><p class="tooling__text">Simplify your testing. Quick and easy web API mocks, generated from API Blueprint, instant deploy, collaborative build, and debugging tools for API integration.</code></p>
         </div></li>
 
     <li class="tooling__item"><div class="tooling__item--wrap">
-      <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__vigia"></span></span>
+      <span class="tooling__ico"><span class="tooling__ico__logo tooling__vigia"></span></span>
       <h3 class="tooling__title">
         <a href="https://github.com/nogates/vigia" class="block larger">
           <span class="block">Vigia</span>
@@ -654,7 +666,7 @@ Delete a message. **Warning:** This action **permanently** removes the message f
 
     <li class="tooling__item"><div class="tooling__item--wrap">
         <span class="tooling__ico">
-            <span class="tooling__ico__logo tooling__ico--construction tooling__paw"></span>
+            <span class="tooling__ico__logo tooling__paw"></span>
         </span>
         <h3 class="tooling__title">
             <a href="http://blog.apiary.io/2014/12/02/Paw-Integration/" class="block larger">
@@ -665,10 +677,10 @@ Delete a message. **Warning:** This action **permanently** removes the message f
         </h3>
         <p class="tooling__text">A fully-featured HTTP client for the Mac featuring API Blueprint integration via extensions.</code></p>
     </div></li>
-        
+
     <li class="tooling__item"><div class="tooling__item--wrap">
         <span class="tooling__ico">
-            <span class="tooling__ico__logo tooling__ico--construction tooling__apimatic"></span>
+            <span class="tooling__ico__logo tooling__apimatic"></span>
         </span>
         <h3 class="tooling__title">
             <a href="https://apimatic.io/" class="block larger">
@@ -693,6 +705,105 @@ Delete a message. **Warning:** This action **permanently** removes the message f
         </h3>
         <p class="tooling__text">Transforms API descriptions from/to various formats. You can covert all famous API description formats to API Blueprint with MSON. It also performs validation to detect several types of errors that may exist in our API descritpion. Minor errors are automatically fixed through our a linting process.</p>
     </div></li>
+
+    <li class="tooling__item"><div class="tooling__item--wrap">
+      <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+   --><h3 class="tooling__title"><a href="https://github.com/BishoyDemian/api-blueprint-aspnet-host" class="block larger"><span class="block">ASP.net Blueprint Mock Server</span><span class="tooling__link"></span></a> <span class="block smaller">API Blueprint Mock Server written in ASP.net</span></h3><!--
+   --><p class="tooling__text">Host your API Blueprints inside your ASP.net solution using this built-in mock server inside an encapsulated HTTP module.</code></p>
+    </div></li>
+
+    <li class="tooling__item"><div class="tooling__item--wrap">
+      <span class="tooling__ico"><span class="tooling__ico__logo tooling__grape-apiary"></span></span><!--
+   --><h3 class="tooling__title"><a href="https://github.com/connexio-labs/grape-apiary" class="block larger"><span class="block">grape-apiary</span><span class="tooling__link"></span></a> <span class="block smaller">Autogeneration from Grape</span></h3><!--
+   --><p class="tooling__text">Generate API blueprints automatically from your already defined Grape api endpoints.</code></p>
+      </div></li>
+
+    <li class="tooling__item"><div class="tooling__item--wrap">
+      <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+   --><h3 class="tooling__title"><a href="https://github.com/dac09/grunt-apiary-blueprint" class="block larger"><span class="block">grunt-apiary-blueprint</span><span class="tooling__link"></span></a> <span class="block smaller">Concatenate and publish from Grunt</span></h3><!--
+   --><p class="tooling__text">Generate your full API blueprint APIB by concatenation from smaller sections.</code></p>
+      </div></li>
+      
+    <li class="tooling__item"><div class="tooling__item--wrap">
+      <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+   --><h3 class="tooling__title"><a href="https://github.com/ransico/generator-apiblueprint" class="block larger"><span class="block">generator-apiblueprint</span><span class="tooling__link"></span></a> <span class="block smaller">Yeoman generator to create an apiblueprint project</span></h3><!--
+   --><p class="tooling__text">Yeoman generator to create a new apiblueprint project with a Grunfile allowing generation of HTML (via aglio), a connect HTTP server and live-reload.</p>
+      </div></li>
+
+      <li class="tooling__item">
+        <div class="tooling__item--wrap">
+          <span class="tooling__ico">
+            <span class="tooling__ico__logo tooling__dredd-rack"></span>
+          </span>
+          <h3 class="tooling__title">
+            <a href="https://github.com/gonzalo-bulnes/dredd-rack" class="block larger">
+              <span class="block">Dredd::Rack</span>
+              <span class="tooling__link"></span>
+            </a>
+            <span class="block smaller">Dredd <span title="love">&hearts;</span> for your Rack applications</span>
+          </h3>
+          <p class="tooling__text">A configurable Dredd runner and a clonable Rake task to automate the testing of your Rack (Rails, Sinatra, Grape...) applications API against their blueprints, with Dredd, in Ruby.</p>
+        </div>
+      </li>
+
+      <li class="tooling__item">
+        <div class="tooling__item--wrap">
+          <span class="tooling__ico">
+            <span class="tooling__ico__logo tooling__hyperdrive"></span>
+          </span>
+          <h3 class="tooling__title">
+            <a href="https://github.com/the-hypermedia-project/Hyperdrive" class="block larger">
+              <span class="block">Hyperdrive</span>
+              <span class="tooling__link"></span>
+            </a>
+            <span class="block smaller">Generic API Blueprint Client in Swift</span>
+          </h3>
+          <p class="tooling__text">Hyperdrive allows you to build Swift applications that can evolve at run-time powered by API Blueprint.</p>
+        </div>
+      </li>
+
+    <li class="tooling__item"><div class="tooling__item--wrap">
+      <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+   --><h3 class="tooling__title"><a href="https://github.com/Tuxilero/ABM" class="block larger"><span class="block">API Blueprint Manager</span><span class="tooling__link"></span></a> <span class="block smaller">Manage and implement API Blueprint right inside your IDE</span></h3><!--
+   --><p class="tooling__text">Check your implementation state, and generate entities and request based on API Blueprint.</code></p>
+      </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__hercule"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/jamesramsay/hercule" class="block larger"><span class="block">Hercule</span><span class="tooling__link"></span></a> <span class="block smaller">Document transclusion tool</span></h3><!--
+     --><p class="tooling__text">Ideal for working with multiple API blueprint files.</p>
+        </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/zfcampus/zf-apigility-documentation-apiblueprint" class="block larger"><span class="block">Apigility</span><span class="tooling__link"></span></a> <span class="block smaller">PHP API Framework</span></h3><!--
+     --><p class="tooling__text">Beautiful and powerful documentation for your API created with Apigility.</p>
+        </div></li>
+
+    <li class="tooling__item"><div class="tooling__item--wrap">
+      <span class="tooling__ico"><span class="tooling__ico__logo tooling__api-blueprint-focus-booster"></span></span><!--
+   --><h3 class="tooling__title"><a href="https://github.com/saamo/api-blueprint-focus-booster" class="block larger"><span class="block">Focus Booster</span><span class="tooling__link"></span></a> <span class="block smaller">API Blueprint Focus Booster</span></h3><!--
+   --><p class="tooling__text">Gulp tasks for writing large API Blueprints efficiently</p>
+      </div></li>
+
+    <li class="tooling__item"><div class="tooling__item--wrap">
+      <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+   --><h3 class="tooling__title"><a href="https://bluepaste.herokuapp.com"
+           class="block larger"><span class="block">Bluepaste</span><span class="tooling__link"></span></a> <span class="block smaller">API Blueprint Focus Booster</span></h3><!--
+   --><p class="tooling__text">API Blueprint pastebin service.</p>
+      </div></li>
+
+      <li class="tooling__item"><div class="tooling__item--wrap">
+        <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction"></span></span><!--
+     --><h3 class="tooling__title"><a href="https://github.com/apiaryio/swagger2blueprint" class="block larger"><span class="block">swagger2blueprint</span><span class="tooling__link"></span></a> <span class="block smaller">Converter</span></h3><!--
+     --><p class="tooling__text">Convert Swagger API descriptions into API Blueprint.</p>
+        </div></li>
+
+        <li class="tooling__item"><div class="tooling__item--wrap">
+          <span class="tooling__ico"><span class="tooling__ico__logo tooling__gelato"></span></span><!--
+       --><h3 class="tooling__title"><a href="https://gelato.io" class="block larger"><span class="block">Gelato.io</span><span class="tooling__link"></span></a> <span class="block smaller">Developer Portal as a Service</span></h3><!--
+       --><p class="tooling__text">Import your API Blueprint and get hosted documentation, with an API Explorer, Developer Registration, proper Search and more!</p>
+          </div></li>
 
       <li class="tooling__item"><div class="tooling__item--wrap">
         <span class="tooling__ico"><span class="tooling__ico__logo tooling__ico--construction tooling__ico--question"><span class="tooling__icon--cube">?</span></span></span><!--
@@ -737,7 +848,7 @@ Delete a message. **Warning:** This action **permanently** removes the message f
 
   <script>initDots();</script>
   <script>
-    var astParserURI = 'http://api.apiblueprint.org/parser';
+    var astParserURI = 'https://api.apiblueprint.org/parser';
     yepnope.paths = {
       'acePath': '/assets/ace-noconflict-min'
     };
