@@ -97,7 +97,8 @@ getAST = function(code, thenBack) {
     return;
   }
   promise.post(window.astParserURI + '?_t=' + (1 * (new Date())), code, {
-    "Accept": "vnd.apiblueprint.parseresult.raw+json"
+    "Accept": "application/vnd.apiblueprint.parseresult+json",
+    "Content-Type": "text/vnd.apiblueprint"
   }).then(function(err, text, xhr) {
     args = [err, text, code];
     if (!codeCache.get(code, false)) {
